@@ -13,14 +13,14 @@ import initial_matrix_writter
 curve = curves.Curve.CIRCLE
 
 # Generate initial matrix
-dim = 100
-distribution = 'bernoulli'
+dim = 40
+distribution = 'complexGaussian'
 remove_trace = True
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed=998)
 initial_matrix = initial_matrix_type['matrix']
 
 # Define the number of initial summary steps and initial rotation steps
-initial_s_steps = 2000
+initial_s_steps = 1000
 initial_t_steps = 1000
 
 s_data = s_unordered.get_unordered_s_increasing_eigenvalues(initial_matrix, initial_s_steps, curve)

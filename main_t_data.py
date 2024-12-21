@@ -15,7 +15,7 @@ s_data = loaded_s_data["summary_items"]
 # Define the number of summary steps
 initial_t_steps = 1000
 
-t_data = main1.compute_t_data(201, initial_t_steps, initial_matrix, s_data, curve)
+t_data = main1.compute_t_data(202, initial_t_steps, initial_matrix, s_data, curve)
 
 np.save('ordered_t_eigenvalues', t_data)
 
