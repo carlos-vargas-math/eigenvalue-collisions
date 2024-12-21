@@ -1,6 +1,6 @@
 import numpy as np
-import points_on_curve as curves
-import random_matrix_model as rmmodel
+import random_matrix_model.points_on_curve as curves
+import computation.random_matrix_model as rmmodel
 import datatypes
 import datatypes1
 

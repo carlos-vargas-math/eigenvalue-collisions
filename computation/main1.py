@@ -1,11 +1,11 @@
-import points_on_curve as curves
+import random_matrix_model.points_on_curve as curves
 import numpy as np
-import unordered_s_increase_eigenvalue_writter as s_unordered
-import s_eigenvalue_orderer as s_orderer
-import unorderered_refinement
-import unordered_t_increase_eigenvalue_writter as t_unordered
-import t_eigenvalue_orderer as t_ordered
-import find_permutation
+from computation import unordered_s_increase_eigenvalue_writter as s_unordered
+from computation import s_eigenvalue_orderer as s_orderer
+import computation.unorderered_refinement as unorderered_refinement
+from computation import unordered_t_increase_eigenvalue_writter as t_unordered
+from computation import t_eigenvalue_orderer as t_ordered
+import permutation_utils.find_permutation as find_permutation
 
 
 def compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve):
@@ -17,7 +17,7 @@ def compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve):
         t_data, unordered_steps = t_ordered.order_t_increasing_eigenvalues(t_data, s_data, s_time_step)
     return t_data
 
-
+# Not recommended... as it is it may skip some collisions.
 def divide_and_conquer_eigenvalues(
     s_data, initial_matrix, curve, s_0, s_1, initial_t_steps, initial_s_steps,
     t_unordered, t_ordered, unordered_refinement, visited_steps

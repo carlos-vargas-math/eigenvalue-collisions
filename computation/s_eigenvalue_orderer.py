@@ -1,7 +1,7 @@
 import numpy as np
-import points_on_curve as curves
-import random_matrix_model as rmmodel
-import smallest_permutation_distance
+import random_matrix_model.points_on_curve as curves
+import computation.random_matrix_model as rmmodel
+import permutation_utils.smallest_permutation_distance as smallest_permutation_distance
 import datatypes1
 
 def order_s_eigenvalues(data):

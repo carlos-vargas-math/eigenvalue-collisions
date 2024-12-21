@@ -1,26 +1,26 @@
-import points_on_curve as curves
+import random_matrix_model.points_on_curve as curves
 import numpy as np
-import unordered_s_increase_eigenvalue_writter as s_unordered
-import s_eigenvalue_orderer as s_orderer
-import unorderered_refinement
-import unordered_t_increase_eigenvalue_writter as t_unordered
+from computation import unordered_s_increase_eigenvalue_writter as s_unordered
+from computation import s_eigenvalue_orderer as s_orderer
+import computation.unorderered_refinement as unorderered_refinement
+from computation import unordered_t_increase_eigenvalue_writter as t_unordered
 import well_ordered_summaries as t_ordered
 import datatypes1
-import initial_matrix_writter
+import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 
 # set initial matrix and settings
 
 curve = curves.Curve.CIRCLE
 
 # Generate initial matrix
-dim = 40
+dim = 70
 distribution = 'complexGaussian'
 remove_trace = True
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed=998)
 initial_matrix = initial_matrix_type['matrix']
 
 # Define the number of initial summary steps and initial rotation steps
-initial_s_steps = 1000
+initial_s_steps = 2000
 initial_t_steps = 1000
 
 s_data = s_unordered.get_unordered_s_increasing_eigenvalues(initial_matrix, initial_s_steps, curve)
