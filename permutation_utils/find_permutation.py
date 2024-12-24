@@ -6,7 +6,9 @@ def find_best_permutation(z, w):
     z and w, are almost exaclty the same arrays of eigenvalues 
     (with differences due to rounding, etc), 
     possibly in different order. 
-    The method returns the permuted elements of w and the required permutation. 
+    The method returns the permuted elements of w and the required permutation.
+    (this is used to find the permutation that takes R(s, 0) to R(s, 1), 
+    it should not be used for consecutive steps )
     """
     # Compute the distance matrix between z and w
     dist_matrix = np.abs(z[:, np.newaxis] - w[np.newaxis, :])

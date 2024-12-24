@@ -3,7 +3,7 @@ import random_matrix_model.points_on_curve as curves
 import computation.random_matrix_model as rmmodel
 import datatypes1
 
-def get_unordered_t_eigenvalues(initial_matrix, s_data, s_step, number_of_t_steps):
+def get_unordered_t_eigenvalues(initial_matrix, s_data, s_step, number_of_t_steps, curve):
 
     # Load the single dtype item from the .npy file
     s_initial_eigenvalues = s_data[s_step]
@@ -16,7 +16,6 @@ def get_unordered_t_eigenvalues(initial_matrix, s_data, s_step, number_of_t_step
     t_increase = (final_t - initial_t) / number_of_steps
     dim = initial_matrix.shape[0]
     print(dim)
-    curve = curves.Curve.CIRCLE
     custom_dtype = datatypes1.create_summary_item_dtype(dim)
 
     # Create the structured array

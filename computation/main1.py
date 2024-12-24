@@ -10,7 +10,7 @@ import permutation_utils.find_permutation as find_permutation
 
 def compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve):
     print(s_time_step)
-    t_data = t_unordered.get_unordered_t_eigenvalues(initial_matrix, s_data, s_time_step, initial_t_steps)
+    t_data = t_unordered.get_unordered_t_eigenvalues(initial_matrix, s_data, s_time_step, initial_t_steps, curve)
     t_data, unordered_steps = t_ordered.order_t_increasing_eigenvalues(t_data, s_data, s_time_step)
     while unordered_steps > 0:
         t_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, t_data, curve)

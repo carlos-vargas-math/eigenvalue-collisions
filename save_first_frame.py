@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import permutation_utils.find_permutation as find_permutation
+from permutation_utils import find_permutation
 from collections import defaultdict
 
 # Load the eigenvalue trajectories from the structured array

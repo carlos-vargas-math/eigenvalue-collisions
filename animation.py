@@ -11,20 +11,22 @@ loaded_data_animation = np.load("ordered_t_eigenvalues.npy", allow_pickle=True)
 # loaded_data_summary = np.load("ordered_s_eigenvalues.npy", allow_pickle=True)
 # loaded_data = np.load("summary/ordered_s_eigenvalues.npy", allow_pickle=True)
 # loaded_data = np.load("summary/complexGaussian1.npy", allow_pickle=True)
-loaded_data_summary = np.load("summary/complexGaussianN30.npy", allow_pickle=True)
+loaded_data_summary = np.load("computed_examples/N=10&Curve.CIRCUIT&Seed=1001&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
+loaded_s_data = loaded_data_summary['summary_items']
+# loaded_s_data = np.load("ordered_s_eigenvalues.npy")
 # loaded_data = np.load("well_ordered_summaries/complexGaussianN5.npy", allow_pickle=True)
 collisions = 0
 cycle_counts = defaultdict(int)
 
-for step in range(10, 2000): 
-    z = loaded_data_summary['eigenvalues'][step]
-    permutation_indices = loaded_data_summary['associated_permutation'][step]
-    permutation_indices_next = loaded_data_summary['associated_permutation'][step + 1]
+for step in range(10, 999): 
+    z = loaded_s_data['eigenvalues'][step]
+    permutation_indices = loaded_s_data['associated_permutation'][step]
+    permutation_indices_next = loaded_s_data['associated_permutation'][step + 1]
     cycle_decomposition = find_permutation.cycle_decomposition(permutation_indices)
     difference_permutation = find_permutation.find_resultant_permutation(permutation_indices, permutation_indices_next)
-    # print(cycle_decomposition)
-    # print(find_permutation.omit_singletons(difference_permutation))
-    # print("")
+    print(cycle_decomposition)
+    print(find_permutation.omit_singletons(difference_permutation))
+    print("")
 
  # Count the cycles in difference_permutation
     for cycle in find_permutation.omit_singletons(difference_permutation):
@@ -50,8 +52,8 @@ print("Sorted Cycle Counts (by frequency):")
 for cycle, count in sorted_cycle_counts:
     print(f"{cycle}: {count}")
 
-print(loaded_data_summary['associated_permutation'][10])
-print(loaded_data_summary['associated_permutation'][11])
+print(loaded_s_data['associated_permutation'][10])
+print(loaded_s_data['associated_permutation'][11])
 
 s = loaded_data_animation["s"]
 t = loaded_data_animation["t"]
@@ -125,21 +127,21 @@ scatter_plot = ax1.scatter(
 )
 
 # Plot trajectories with cycle-specific colors
-step_interval = 1
-for cycle in cycle_decomposition:
-    cycle_size = len(cycle)
-    cycle_color = size_to_color[cycle_size]
-    for i in cycle:
-        ax1.plot(
-            eigenx[::step_interval, i], 
-            eigeny[::step_interval, i], 
-            linestyle='-', linewidth=0.5, alpha=0.7, color=cycle_color
-        )
+# step_interval = 1
+# for cycle in cycle_decomposition:
+#     cycle_size = len(cycle)
+#     cycle_color = size_to_color[cycle_size]
+#     for i in cycle:
+#         ax1.plot(
+#             eigenx[::step_interval, i], 
+#             eigeny[::step_interval, i], 
+#             linestyle='-', linewidth=0.5, alpha=0.7, color=cycle_color
+#         )
 
 # Define the animate function as before
 
 # Define k: skip every k-1 frames
-k = 15
+k = 10
 
 # Update function for animation
 def animate(i):

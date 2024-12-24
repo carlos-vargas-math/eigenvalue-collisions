@@ -1,7 +1,11 @@
 import numpy as np
 from scipy.spatial import Delaunay
 
-# We want to use delaunay for a more efficient search
+# For eigenvalues of consecutive steps of R(t_0,s_0), R(t_1,s_1),
+# Computes permutation obtained by considering the smallest distances.
+# If this is not a correspondence the method fails 
+# (and intermediate steps in [t_0,t_1], [s_0, s_1] should be considered)  
+# Returns tripple [w_reordered, success (boolean), permutation].
 def get_smallest_permutation_delaunay(z, w):
     points_with_favorite_neighbor = set()
     favorite_neighbors = set()
@@ -60,6 +64,9 @@ def get_smallest_permutation_delaunay(z, w):
 
     if len(current_index_map) != n or len(codomain_set) != n:
         print("failed to obtain bijective solution")
+        for key in complement:
+            print(key)
+            print(w[key])
         return [w, 0, np.arange(n)]  # Return identity permutation if failure
 
     # Return both the permuted eigenvalues and the permutation
@@ -80,3 +87,6 @@ def get_bipartite_edges_2(n, i, j, k):
     if k < n and j > n - 1:
         result.append([k,j])
     return result
+
+
+
