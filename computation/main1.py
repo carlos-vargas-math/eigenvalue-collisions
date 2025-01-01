@@ -17,6 +17,15 @@ def compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve):
         t_data, unordered_steps = t_ordered.order_t_increasing_eigenvalues(t_data, s_data, s_time_step)
     return t_data
 
+
+def comptute_s_data(initial_matrix, initial_s_steps, curve):
+    s_data = s_unordered.get_unordered_s_increasing_eigenvalues(initial_matrix, initial_s_steps, curve)
+    s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
+    while unordered_steps > 0:
+        s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, t_data, curve)
+        s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
+    return s_data
+
 # Not recommended... as it is it may skip some collisions.
 def divide_and_conquer_eigenvalues(
     s_data, initial_matrix, curve, s_0, s_1, initial_t_steps, initial_s_steps,

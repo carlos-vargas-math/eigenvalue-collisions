@@ -1,8 +1,16 @@
 import numpy as np
 import uuid
+from random_matrix_model import points_on_curve
+
+import sys
+import os
+
+# Add the root directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import datatypes1
 
-def generate_initial_matrix(dim, distribution='complexGaussian', remove_trace=False, seed=None):
+
+def generate_initial_matrix(dim, distribution='complexGaussian', remove_trace=True, seed=None, curve=points_on_curve.Curve.CIRCLE):
     sigma = 1/np.sqrt(2*dim)
     # Create a random number generator
     rng = np.random.default_rng(seed)
@@ -35,5 +43,6 @@ def generate_initial_matrix(dim, distribution='complexGaussian', remove_trace=Fa
     result['matrix'] = ginibre
     result['seed'] = seed if seed is not None else -1  # Store the seed; -1 indicates no seed was set
     result['properties'] = properties
+    result['curve'] = curve
     
     return result

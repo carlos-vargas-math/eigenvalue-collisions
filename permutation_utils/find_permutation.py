@@ -25,6 +25,12 @@ def find_best_permutation(z, w):
 def omit_singletons(cycles):
     return [cycle for cycle in cycles if len(cycle) > 1]
 
+def has_longer_cycles(cycles):
+    for cycle in cycles:
+        if len(cycle) > 2:
+            return True
+    return False
+
 def cycle_decomposition(perm):
     n = len(perm)
     visited = [False] * n  # Track which elements have been visited
@@ -81,3 +87,5 @@ def find_resultant_permutation(perm1, perm2):
             result_cycles.append(cycle)
 
     return result_cycles
+
+

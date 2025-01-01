@@ -3,7 +3,6 @@ import numpy as np
 from computation import unordered_s_increase_eigenvalue_writter as s_unordered
 from computation import s_eigenvalue_orderer as s_orderer
 import computation.unorderered_refinement as unorderered_refinement
-from computation import unordered_t_increase_eigenvalue_writter as t_unordered
 from permutation_utils import find_permutation
 import datatypes1
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
@@ -12,25 +11,23 @@ from computation import main1
 # set initial matrix and settings
 
 # Generate initial matrix
-dim = 100
+dim = 10
 distribution = 'complexGaussian'
 remove_trace = True
-curve = curves.Curve.CROSSING
-seed = 1000
+curve = curves.Curve.CIRCLE
+seed = 997
 
 compute_summary = False
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
 
-initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed)
+initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)
 initial_matrix = initial_matrix_type['matrix']
 
 # Define the number of initial summary steps and initial rotation steps
-initial_s_steps = 1000
-initial_t_steps = 1000
+initial_s_steps = 2000
+initial_t_steps = 2000
 
-s_data = s_unordered.get_unordered_s_increasing_eigenvalues(initial_matrix, initial_s_steps, curve)
-s_data = s_orderer.order_s_eigenvalues(s_data)
-s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, s_data, curve)
+s_data = main1.comptute_s_data(initial_matrix, initial_s_steps, curve)
 
 np.save('ordered_s_eigenvalues.npy', s_data)
 

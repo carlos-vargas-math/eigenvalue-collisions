@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2024.11.12)  18 DEC 2024 14:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2024.11.12)  1 JAN 2025 11:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -288,85 +288,90 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 49.
+(Font)              <7> on input line 51.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png, id=22, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png  used on input line 67.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png  used on input line 71.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png, id=24, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png  used on input line 68.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png  used on input line 72.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png, id=25, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png  used on input line 69.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png  used on input line 73.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 
-Overfull \hbox (17.22221pt too wide) in paragraph at lines 67--70
+Overfull \hbox (17.22221pt too wide) in paragraph at lines 71--74
 [][] []
  []
 
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png, id=26, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png  used on input line 82.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png  used on input line 88.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png, id=27, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png  used on input line 83.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png  used on input line 89.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png, id=28, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png  used on input line 84.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png  used on input line 90.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png, id=29, 462.528pt x 346.896pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png  used on input line 85.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png  used on input line 91.
 (pdftex.def)             Requested size: 172.5pt x 129.37639pt.
 
-Overfull \hbox (17.22221pt too wide) in paragraph at lines 82--86
+Overfull \hbox (17.22221pt too wide) in paragraph at lines 88--92
 [][] []
  []
 
 
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 82--86
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 88--92
 [] [] 
  []
 
-[2 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png>] [3 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png>]
+[2 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_1.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_3.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_2.png>]
+Overfull \hbox (10.19511pt too wide) in paragraph at lines 104--105
+[]\OT1/cmr/m/n/10 The ro-tat-ing uni-tary ma-trix can ac-tu-ally be re-placed by any other parametrized
+ []
+
+[3 </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png>]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 88.
+(Font)              <14.4> on input line 115.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/N100S00500.png, id=43, 281.3712pt x 296.5479pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100S00500.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/N100S00500.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100S00500.png  used on input line 135.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100S00500.png  used on input line 166.
 (pdftex.def)             Requested size: 165.59853pt x 174.53639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png, id=44, 281.3712pt x 296.5479pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png  used on input line 140.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png  used on input line 171.
 (pdftex.def)             Requested size: 165.59853pt x 174.53639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png, id=45, 281.3712pt x 296.5479pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png  used on input line 145.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png  used on input line 176.
 (pdftex.def)             Requested size: 165.59853pt x 174.53639pt.
 </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png, id=46, 281.3712pt x 296.5479pt>
 File: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png Graphic file (type png)
 <use /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png>
-Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png  used on input line 150.
+Package pdftex.def Info: /home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png  used on input line 181.
 (pdftex.def)             Requested size: 165.59853pt x 174.53639pt.
  [4] [5 </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00500.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00505.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00510.png> </home/charli/Math/eigenvalueTracking/animatedGinibre/N100s00515.png>]
-Overfull \hbox (1.35811pt too wide) in paragraph at lines 198--201
+Overfull \hbox (1.35811pt too wide) in paragraph at lines 229--232
 []\OT1/cmr/m/n/10 The pairs of eigen-val-ues that acually crash de-pends on how we reach $\OML/cmm/m/it/10 R\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 s[]; t[]\OT1/cmr/m/n/10 )$.
  []
 
@@ -374,16 +379,16 @@ Overfull \hbox (1.35811pt too wide) in paragraph at lines 198--201
 Here is how much of TeX's memory you used:
  11618 strings out of 481209
  243585 string characters out of 5914746
- 494388 words of memory out of 5000000
+ 494405 words of memory out of 5000000
  28367 multiletter control sequences out of 15000+600000
  409251 words of font info for 46 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  87i,8n,89p,440b,291s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on /home/charli/Math/eigenvalueCollissions/tex/AnimatedGinibre.pdf (6 pages, 1558369 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on /home/charli/Math/eigenvalueCollissions/tex/AnimatedGinibre.pdf (6 pages, 1571359 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 113 PDF objects out of 1000 (max. 8388607)
+ 66 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  68 words of extra memory for PDF output out of 10000 (max. 10000000)
 

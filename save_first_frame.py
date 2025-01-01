@@ -5,7 +5,9 @@ from permutation_utils import find_permutation
 from collections import defaultdict
 
 # Load the eigenvalue trajectories from the structured array
-loaded_data_animation = np.load("ordered_t_eigenvalues.npy", allow_pickle=True)
+
+loaded_data_animation = np.load("computed_examples/LargeN/s=150&N=400&Curve.CIRCLE&Seed=999&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
+# loaded_data_animation = np.load("ordered_t_eigenvalues.npy", allow_pickle=True)
 # loaded_data_animation = np.load("well_ordered_summaries/t_eigenvaluesS100.npy", allow_pickle=True)
 
 # Extract data from the loaded array
@@ -35,7 +37,7 @@ num_unique_sizes = len(unique_sizes)  # Number of unique sizes
 # Map each unique size to an evenly spaced color from 25% to 100% of the colormap
 cmap = plt.get_cmap("plasma")
 size_to_color = {
-    size: cmap(0.25 + 0.75 * (1 - i / (num_unique_sizes - 1))) 
+    size: cmap(0.25) if len(unique_sizes) == 1 else cmap(0.25 + 0.75 * (1 - i / (num_unique_sizes - 1)))
     for i, size in enumerate(unique_sizes)
 }
 
@@ -90,7 +92,6 @@ def save_first_frame(filename="first_frame.png"):
                 ha='center', 
                 va='center'
             )
-
 
     # Plot trajectories with cycle-specific colors
     step_interval = 1

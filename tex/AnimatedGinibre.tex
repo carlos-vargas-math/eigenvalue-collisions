@@ -3,21 +3,21 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 
-\title{How long should one stare at the Haar-Ginibre railway?}
+\title{Eigenvalue collisions for approximations of certain R-diagonal elements}
 \author{Carlos Vargas}
 \date{\today}
 
 \begin{document}
 	\maketitle	
 	\begin{abstract}
-		We study the eigenvalues of a family of matrices 
+		We study the collisions of eigenvalues for a family of matrices 
 		$$R(s,t) = \alpha(s)C + \beta(s)U(t),$$ 
 		periodic on the parameter $t\in [0,1]$, with $s\in [0, 1]$,   
 		determined by a realization of a Ginibre matrix $C$ 
 		and a rotating unitary matrix $U(t)$. 
 		
 		The matrices in this family are approximations of 
-		R-diagonal elements in free probability, studied by 
+		R-diagonal elements in free probability, which have been studied by 
 		Haagerup-Larsen [?], Kemp-Speicher [?] and P. Zhong [?]. 
 		
 		We study the eigenvalue collisions for all values of $s$ and $t$. 
@@ -30,15 +30,17 @@
 		
 		The intricate web of paths that the eigenvalues collectively traverse 
 		remains quite stable for small variations in $s$. 
-		However, the actual permutation $\sigma(s + \Delta s)$ 
-		itself does present variations, 
+		However, the actual permutations $\sigma(s)$, $\sigma(s + \Delta s)$ 
+		do present variations, 
 		indicating eigenvalue collisions 
 		at some intermediate values $(s,t)$, $s\in (s, s + \Delta s)$,
-		which explain the permutation discrepancy. 
+		which explain the permutation discrepancy 
+		and are indicative of local maxima of the speed of eigenvalues. 
 		
 		The eigenvalue 'track-flips' that occur before/after these colissions 
-		are the essential differences between consecutive railway systems, 
-		as the eigenvalues proceed to team-up to whirl around themselves and then around zero.
+		account for the essential differences between consecutive eigenvalue trajectories,
+		with the eigenvalues proceeding to team-up 
+		to whirl, first around themselves and then around zero, as $s$ increases.
 		
 		We report some first statistics about these processes and their collisions, 
 		and we include a simple package to perform/store/display these (parallellizable) 
@@ -46,8 +48,9 @@
  	\end{abstract}
 	\section{Introduction}
 
-	Let $C$ be a realization of an $N\times N$ Ginibre matrix and, for $t\in [0,1]$ and 
-	let $\omega$ is the first clock-wise non-trivial complex $N$-th root of $1$. Let
+	Let $C$ be a realization of an $N\times N$ Ginibre matrix 
+	and let $\omega$ be the first clock-wise non-trivial complex $N$-th root of $1$. 
+	For $t\in [0,1]$ let
 	$$U(t) = \mathrm{diag}(\omega^{tN}, \omega^{tN+1}, \omega^{tN+2}, \dots   , \omega^{tN+N-1}),$$ 
 	be a diagonal matrix with equi-distant points along the circle. Notice that $U(0) = U(1)$.
 
@@ -57,7 +60,8 @@
 
 	In general it is quite a task to compute distributions 
 	of non-selfadjoint random matrix models. 
-	The family of matrices in this model, however, are approximations of R-diagonal elements in free probability, 
+	The matrices in this model, however, 
+	are approximations of R-diagonal elements in free probability, 
 	for which some actual computations are possible [?,?]. 
 
 	Depending on the values of $\alpha$ and $\beta$, 
@@ -71,32 +75,60 @@
 	We choose $\alpha(s) = \cos(s \pi /2)$ and $\beta(s) = \sin(s \pi /2)$ 
 	specificaly to make the outer radious of the model equal to one. 
 	The eigenvalues for any other positive pairs $(\alpha, \beta)$ can be obtained 
-	by scaling values within our parametrization.
+	by scaling values in this parametrization.
 	
-	In this work we mainly want to draw attention to the effect of increasing $t$,
+	In this work we mainly want to draw attention at the effect of increasing 
+	the periodic parameter $t$,
 	which 'turns' the eigenvalues of the model clockwise.
 
-	In the figure, we show the eigenvalues (red circles) tracking the eigenvalues 
-	at after small increases of t (blue stars)
+	The figures show one set of eigenvalues (red circles) 
+	trailing the next set of eigenvalues 
+ 	after small increases of t (blue stars)
 	
 	\includegraphics[width=0.5\textwidth]{/home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_10.png} 
 	\includegraphics[width=0.5\textwidth]{/home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_8.png} 
 	\includegraphics[width=0.5\textwidth]{/home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_11.png} 
 	\includegraphics[width=0.5\textwidth]{/home/charli/Math/eigenvalueTracking/animatedGinibre/Figure_9.png}
+
+	Notice that the eigenvalues in the outer part of the domain are moving much more slowly 
+	than the eigenvalues on the inner part.
+
+	On the other hand, since $U(0) = U(1)$, as $t$ increases from zero to one, 
+	most eigenvalues won't make a complete turn to return to their original positions, 
+	but each position still must be reached at $t=1$. 
+	This leads to a non-trivial permutation $\sigma(s)$ 
+	associated with the matrix process.
 	
+	We use this permutation to detect and count eigenvalue collissions (see Section 2).
+
+	The rotating unitary matrix can actually be replaced by any other parametrized curve(s).
+
+	(Include circuit and crossing images, 
+	comments about increase in number of collisions for circuit vs circle, 
+	'cheating' Madrazo eigenvalues in crossing case)
+
+	We include implementations of our methods in Python 
+	to reproduce the data here presented 
+	and for the readers convenience.
+
 	\newpage
 	\section{Permutation $\sigma(s)$}
 
-	Unless $s$ is too close to $0$ or $1$, the process of increasing the periodic parameter $t$
-	leads in general to a non-trivial permutation $\sigma(s)$ after reaching $t=1$.
-	Indeed, since eigenvalues at the outer part of the annulus are moving more slowly, 
-	they wont be able to perform a complete turn, 
-	thus falling into some other eigenvalue's original position at $t=0$.
+	Unless $s$ is too close to $0$ (static) or $1$ (perfect rotation) 
+	the process of increasing the periodic parameter $t$
+	rotates inner and outer eigenvalues at different speeds, leading to 
+	non-trivial permutations $\sigma(s)$ relating the eigenvalues of $R(s,0)$ and $R(s,1)$, 
+	after increasing $t$ from zero to one.
+
+	We want to study eigenvalue collisions aided by this permutation.
 
 	Let us consider first the eigenvalues of $R(0,t) = R(0,0)$. 
-	These are just the eigenvalues of a complex Gaussian Ginibre matrix $C$,
+	These are just the eigenvalues of the complex Gaussian Ginibre matrix $C$,
 	with explicit joint distribution 
-	$$(insert formula)$$
+	$$\rho (\lambda_1, \dots , \lambda_N) = 
+	\frac{1}{\pi^n \prod_{k=1}^N k!}
+	\exp(-\sum_{k=1}^N |\lambda_{k}|^{-2}) 
+	\prod_{1\leq j < k \leq N} |\lambda_k - \lambda_j|^2$$
 
 	As $N\to \infty$ this distribution converges to uniform distribution on the unit disc.
 
@@ -104,24 +136,23 @@
 	we will first label the eigenvalues increasingly by norm at $R(0,0)$. 
 	
 	Then we consider all the values $R(s,0)$, 
-	(with $t = 0$) and increase $s$ slowly, keeping track of the labels continuosly 
+	increasing $s$ slowly, keeping track of the eigenvalue labels continuosly, 
 	until we reach $R(1,0)$. 
 	
-	In case of ambiguity of eigenvalue tracking, a refinement is performent on 
+	In case of ambiguity of eigenvalue tracking, a refinement is performend on 
 	the partition on $s \in [0,1]$.
 
-	After this is performed and a continous ordering of the eigenvalues for all values 
-	of $s$ and $t=0$ has been achieved, now we consider, for each $s\in [0,1]$ 
+	After this step a continous ordering of the eigenvalues for all values 
+	of $s$ and $t=0$ has been achieved. Now we consider, for each fixed $s\in [0,1]$ 
 	(in the $s$-partition) the process $R(s,t)$ when increasing $t$ from $0$ to $1$, 
 	keeping track of the eigenvalues.
 
-	For some $s$ relatively small we may observe some differences on the permutations, 
+	For small variations of $s$ we may observe differences on the permutations, 
 	while noticing very little discrepancies on the collective trails traveled.
 
 	In the Figure $s=0.0500, 0.0505, 0.0510, 0.0515$. 
-	The eigenvalue tracks are colored according to cycle length 
-	
-	(yellow = singletons, orange = 2-cycles, ... , darker cycles of greater length). 
+	The eigenvalue tracks are colored according to cycle length, 
+	from yellow (shortest cycles) to purple (longest cycles)
 	
 	Notice first the large, $26$-element purple cycle $[1, 7, 19, 51, 25, \dots, 16, 8]$. 
 
@@ -204,10 +235,26 @@
 	From the $t$-processes we may extract different types of eigenvalue collision data
 	for visualtization and/or statistics.
 
-\end{document}
+	\section{Collision statistics}
 
-\section{References}
+	Diagonal matrices vs free case.
 
-- P. Zhong. (include reference...)
+	\section{About the algorithm}
+
+	General description of the algorithm. 
+	
+	Main bottleneck: linear algebraic library method for eigenvalues.
+	Maybe a more specialized, explicitly pivoted method could 
+	reduce computing time at this step. 
+
+	Use of Delaunay Triangulations. 
+	
+	About condition number and shift.
+
+	
+	\section{References}
+
+	- P. Zhong. (include reference...)
+	
 
 \end{document}

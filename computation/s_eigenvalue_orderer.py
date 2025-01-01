@@ -36,6 +36,7 @@ def order_s_eigenvalues(data):
 
         # Update the 'eigenvalues' field in the updated_data array
         updated_data[i]['eigenvalues'] = new_w
+        unordered_steps = 0
         
         # Set 'ordered' to True since we reordered this entry
         if ordered == 0:
@@ -43,6 +44,8 @@ def order_s_eigenvalues(data):
             print("interval t: " + str(data['t'][i-1]) + " to " + str(data['t'][i]))
             # Since there's an issue, continue to the next index
             i += 1
+            unordered_steps += 1
+
         else:
             updated_data[i]['ordered'] = True
             # Check consecutive entries
@@ -57,5 +60,5 @@ def order_s_eigenvalues(data):
         z = new_w
 
     # Save the structured array with reordered eigenvalues to a .npy file
-    return updated_data
+    return [updated_data, unordered_steps]
 
