@@ -14,8 +14,8 @@ from computation import main1
 dim = 10
 distribution = 'complexGaussian'
 remove_trace = True
-curve = curves.Curve.CIRCUIT
-seed = 1000
+curve = curves.Curve.CIRCLE
+seed = 1008
 
 compute_summary = False
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)

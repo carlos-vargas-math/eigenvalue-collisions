@@ -45,3 +45,7 @@ def parametrized_curve(n, curve_type:Curve, shift):
                 t_0 = j[t] - 4 - np.pi/2
                 z[t] = complex(np.cos(t_0+3*np.pi/2), np.sin(t_0+3*np.pi/2))    
     return z
+
+def diagonal_matrix(n, curve_type:Curve, shift):
+    points = parametrized_curve(n, curve_type, shift)
+    return np.diag(points)

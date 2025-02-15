@@ -29,7 +29,7 @@ def get_unordered_t_eigenvalues(initial_matrix, s_data, s_step, number_of_t_step
     for i in range(number_of_steps):
         i += 1
         t += t_increase
-        print(i)
+        # print(i)
         data[i]['t'] = t
         data[i]['s'] = s
         data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_flush_ginibre_toilet(initial_matrix, s, t, curve))  # Complex eigenvalues

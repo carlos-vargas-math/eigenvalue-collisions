@@ -5,6 +5,7 @@ from permutation_utils import find_permutation
 
 # loaded_data_animation = np.load("computed_examples/LargeN/s=151&N=400&Curve.CIRCLE&Seed=999&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
 loaded_data_animation = np.load("ordered_t_eigenvalues.npy", allow_pickle=True)
+# loaded_data_animation = np.load("computed_examples/N=10&Curve.CIRCLE&Seed=1000&Distribution=complexGaussian&Traceless=True/300.npy", allow_pickle=True)
 
 s = loaded_data_animation["s"]
 t = loaded_data_animation["t"]
@@ -90,7 +91,7 @@ for cycle in cycle_decomposition:
         )
 
 # Define k: skip every k-1 frames
-k = 15
+k = 10
 
 # Update function for animation
 def animate(i):
