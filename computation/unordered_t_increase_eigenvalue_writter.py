@@ -32,7 +32,7 @@ def get_unordered_t_eigenvalues(initial_matrix, s_data, s_step, number_of_t_step
         # print(i)
         data[i]['t'] = t
         data[i]['s'] = s
-        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_flush_ginibre_toilet(initial_matrix, s, t, curve))  # Complex eigenvalues
+        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_generate_ginibre_whirlwind(initial_matrix, s, t, curve))  # Complex eigenvalues
         data[i]['ordered'] = False
 
     # Save the structured array to a .npy file

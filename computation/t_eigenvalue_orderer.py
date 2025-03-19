@@ -1,7 +1,7 @@
 import numpy as np
 import random_matrix_model.points_on_curve as curves
 import computation.random_matrix_model as rmmodel
-import permutation_utils.smallest_permutation_distance as smallest_permutation_distance
+import permutation_utils.minimum_bipartite_matching as minimum_bipartite_matching
 import datatypes1
 
 def order_t_increasing_eigenvalues(data, s_data, s_step):
@@ -31,7 +31,7 @@ def order_t_increasing_eigenvalues(data, s_data, s_step):
         w = data['eigenvalues'][i]
         
         # Computes the rearrangement of w that minimizes 
-        new_w, ordered, permutation = smallest_permutation_distance.get_smallest_permutation_delaunay(z, w)
+        new_w, ordered, permutation = minimum_bipartite_matching.delaunay_bipartite_matching(z, w)
 
         # Update the 'eigenvalues' field in the updated_data array
         updated_data[i]['eigenvalues'] = new_w

@@ -5,4 +5,6 @@ Main
 
 ToDo/Fix
 1. Compute some more relevant data for summary/animation such as: estimate collision values (i,j,s,t) and smallest distances (summary), Delaunay triangulations (animation).
-2. Method to compute all collisions should insert a s_step in between consecutive steps that differ by a permutation with some cycle > 3 (so that collisions are properly accounted for).
+2. Method to insert an s_step in between consecutive steps that differ by a permutation with some cycle > 3 (so that the precise collisions are properly accounted for).
+
+

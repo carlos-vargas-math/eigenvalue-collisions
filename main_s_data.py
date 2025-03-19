@@ -10,12 +10,15 @@ from computation import main1
 
 # set initial matrix and settings
 
+# 1001 1005 1009 1017 1020 1022 1035 1038 1043 1044 1047 1048 1070 1072 1094
+
 # define parameter values
 dim = 10
-distribution = 'complexGaussian'
+# distribution = 'complexGaussian'
+distribution = 'bernoulli'
 remove_trace = True
-curve = curves.Curve.CIRCUIT
-seed = 1000
+curve = curves.Curve.CIRCLE
+seed = 1095
 
 compute_summary = False
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
@@ -42,151 +45,3 @@ ginibre_summary['initial_matrix'] = initial_matrix_type
 # Populate the Ginibre summary and save
 ginibre_summary['summary_items'] = s_data
 np.save(summary_name, ginibre_summary)
-
-# compute t_data (this method takes quite long, 
-# as it computes t_data for all points in the s_partition)
-# If one wants to compute t_data for just a few s_steps, use main_t_data.py
-
-# non-D&C method (D&C might be a bad idea)
-last_permutation = np.arange(dim)
-if (compute_summary == True):
-    print("actual_s_steps" + str(actual_s_steps))
-    for s_time_step in range(1 , actual_s_steps): 
-
-        t_data = main1.compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve)
-        eigenvalues = t_data['eigenvalues']  # This is a (N_matrices, N_eigenvalues) array of complex eigenvalues
-        # np.save('ordered_t_eigenvalues.npy', t_data)
-        z = eigenvalues[0, :]
-        w = eigenvalues[-1, :]
-        permuted_w, permutation_indices = find_permutation.find_best_permutation(z, w)
-        cycle_decomposition = find_permutation.cycle_decomposition(permutation_indices)
-        difference_permutation = find_permutation.find_resultant_permutation(last_permutation, permutation_indices)
-        if find_permutation.has_longer_cycles(difference_permutation):
-            print("Will insert extra step, difference permutation has longer cycles")
-            print(difference_permutation)
-            # s_data['ordered'][s_time_step] = False
-        last_permutation = permutation_indices
-
-        print(cycle_decomposition)
-        s_data['associated_permutation'][s_time_step] = permutation_indices
-
-
-    np.save('ordered_s_eigenvalues.npy', s_data)
-    ginibre_summary['summary_items'] = s_data
-
-    np.save(summary_name, ginibre_summary)
-
-    # Update the size of s_data if refinement has been applied
-    actual_s_steps = len(s_data)
-
-    # Recreate ginibre_summary with updated dtype
-    ginibre_summary_dtype = datatypes1.create_ginibre_summary_dtype(dim, actual_s_steps)
-    ginibre_summary = np.zeros((), dtype=ginibre_summary_dtype)
-
-    # Assign the updated s_data
-    ginibre_summary['summary_items'] = s_data
-    # Populate the fields
-    ginibre_summary['initial_matrix'] = initial_matrix_type
-
-    # Save ginibre_summary
-    np.save(summary_name, ginibre_summary)
-
-    s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, s_data, curve)
-    s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
-
-    actual_s_steps = len(s_data)
-    print(actual_s_steps)
-    for s_time_step in range(1 , actual_s_steps):        
-        if np.array_equal(s_data['associated_permutation'][s_time_step], np.zeros(dim)):
-            t_data = main1.compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve)
-            eigenvalues = t_data['eigenvalues']  # This is a (N_matrices, N_eigenvalues) array of complex eigenvalues
-            # np.save('ordered_t_eigenvalues.npy', t_data)
-            z = eigenvalues[0, :]
-            w = eigenvalues[-1, :]
-            permuted_w, permutation_indices = find_permutation.find_best_permutation(z, w)
-            cycle_decomposition = find_permutation.cycle_decomposition(permutation_indices)
-            s_data['associated_permutation'][s_time_step] = permutation_indices
-            print(cycle_decomposition)
-    
-    np.save('refined_ordered_s_eigenvalues.npy', s_data)
-    actual_s_steps = len(s_data)
-
-    # Recreate ginibre_summary with updated dtype
-    ginibre_summary_dtype = datatypes1.create_ginibre_summary_dtype(dim, actual_s_steps)
-    ginibre_summary = np.zeros((), dtype=ginibre_summary_dtype)
-
-    # Assign the updated s_data
-    ginibre_summary['summary_items'] = s_data
-    # Populate the fields
-    ginibre_summary['initial_matrix'] = initial_matrix_type
-
-    # Save ginibre_summary
-    np.save(summary_name, ginibre_summary)
-
-# current_repetition = 0
-# number_of_final_refinements = 10
-# while (current_repetition < number_of_final_refinements):
-#     print("refinement number ", current_repetition)
-#     current_repetition += 1
-#     last_permutation = np.arange(dim)
-#     print("actual_s_steps" + str(actual_s_steps))
-#     for s_time_step in range(1 , actual_s_steps): 
-#         permutation_indices = s_data['associated_permutation'][s_time_step]
-#         difference_permutation = find_permutation.find_resultant_permutation(last_permutation, permutation_indices)
-#         if find_permutation.has_longer_cycles(difference_permutation):
-#             print("Will insert extra step, difference permutation has longer cycles")
-#             print(difference_permutation)
-#             s_data['ordered'][s_time_step] = False
-#         last_permutation = permutation_indices
-
-#     np.save('ordered_s_eigenvalues.npy', s_data)
-#     ginibre_summary['summary_items'] = s_data
-
-#     np.save(summary_name, ginibre_summary)
-
-#     # Update the size of s_data if refinement has been applied
-#     actual_s_steps = len(s_data)
-
-#     # Recreate ginibre_summary with updated dtype
-#     ginibre_summary_dtype = datatypes1.create_ginibre_summary_dtype(dim, actual_s_steps)
-#     ginibre_summary = np.zeros((), dtype=ginibre_summary_dtype)
-
-#     # Assign the updated s_data
-#     ginibre_summary['summary_items'] = s_data
-#     # Populate the fields
-#     ginibre_summary['initial_matrix'] = initial_matrix_type
-
-#     # Save ginibre_summary
-#     np.save(summary_name, ginibre_summary)
-
-#     s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, s_data, curve)
-#     s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
-
-#     actual_s_steps = len(s_data)
-#     print(actual_s_steps)
-#     for s_time_step in range(1 , actual_s_steps):        
-#         if np.array_equal(s_data['associated_permutation'][s_time_step], np.zeros(dim)):
-#             t_data = main1.compute_t_data(s_time_step, initial_t_steps, initial_matrix, s_data, curve)
-#             eigenvalues = t_data['eigenvalues']  # This is a (N_matrices, N_eigenvalues) array of complex eigenvalues
-#             # np.save('ordered_t_eigenvalues.npy', t_data)
-#             z = eigenvalues[0, :]
-#             w = eigenvalues[-1, :]
-#             permuted_w, permutation_indices = find_permutation.find_best_permutation(z, w)
-#             cycle_decomposition = find_permutation.cycle_decomposition(permutation_indices)
-#             s_data['associated_permutation'][s_time_step] = permutation_indices
-#             print(cycle_decomposition)
-    
-#     np.save('refined_ordered_s_eigenvalues.npy', s_data)
-#     actual_s_steps = len(s_data)
-
-#     # Recreate ginibre_summary with updated dtype
-#     ginibre_summary_dtype = datatypes1.create_ginibre_summary_dtype(dim, actual_s_steps)
-#     ginibre_summary = np.zeros((), dtype=ginibre_summary_dtype)
-
-#     # Assign the updated s_data
-#     ginibre_summary['summary_items'] = s_data
-#     # Populate the fields
-#     ginibre_summary['initial_matrix'] = initial_matrix_type
-
-#     # Save ginibre_summary
-#     np.save(summary_name, ginibre_summary)

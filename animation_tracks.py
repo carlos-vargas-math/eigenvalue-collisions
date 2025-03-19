@@ -3,46 +3,14 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from permutation_utils import find_permutation
 
-
-# Load data for the required steps circle, seed 1000
-# steps = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-# n, m = 0, 1  # collision slice indices
-# steps = [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
-# n, m = 1, 10  # collision slice indices
-# steps = [200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 300]
-# n, m = 10, 17  # collision slice indices
-# steps = [300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400]
-# n, m = 17, 43  # collision slice indices
-# steps = [400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500]
-# n, m = 43, 71  # collision slice indices
-# steps = [500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600]
-# n, m = 71, 85  # collision slice indices
-# steps = [600, 620, 640, 660, 680, 700]
-# n, m = 85, 90  # collision slice indices
-# loaded_data = [np.load(f"computed_examples/N=10&Curve.CIRCLE&Seed=1000&Distribution=complexGaussian&Traceless=True/{step}.npy", allow_pickle=True) for step in steps]
+steps = [3,10,20,30,40,50]
+n, m = 0, 0  # collision slice indices
+loaded_data = [np.load(f"computed_examples/N=10&Curve.CIRCLE&Seed=1095&Distribution=bernoulli&Traceless=True/{step}.npy", allow_pickle=True) for step in steps]
 # grid_search_summary_array = np.load("N=10seedFrom1000To1000&Curve.CIRCLE&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-
-speed = 5
-
-# Load data for the required steps ciruit, seed 1000
-steps = [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-n, m = 0, 3  # collision slice indices
-# steps = [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
-# n, m = 3, 7  # collision slice indices
-# steps = [200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 300]
-# n, m = 7, 12  # collision slice indices
-# steps = [300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400]
-# n, m = 12, 25  # collision slice indices
-# steps = [400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500]
-# n, m = 25, 53  # collision slice indices
-# steps = [500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600]
-# n, m = 53, 87  # collision slice indices
-# steps = [600, 620, 640, 660, 680, 700]
-# n, m = 87, 100  # collision slice indices
-loaded_data = [ np.load(f"computed_examples/N=10&Curve.CIRCUIT&Seed=1000&Distribution=complexGaussian&Traceless=True/{step}.npy", allow_pickle=True) for step in steps]
-grid_search_summary_array = np.load("N=10seedFrom1000To1000&Curve.CIRCUIT&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
+grid_search_summary_array = []
 
 # non main steps scatter points are not displayed. 
+speed = 3
 main_steps = range(len(steps))
 
 # Extract the dictionaries from the data
@@ -56,10 +24,13 @@ for data_dict in data_list:  # data_list contains lists of dictionaries
 
 # Sort the rows by value_0 (third element in each tuple)
 rows.sort(key=lambda x: x[2])
+print("number of collisions = " +str(len(rows)))
 
 # Print results
+index=0
 for row in rows:
-    print(row)
+    print(str(index) +", " + str(row))
+    index +=1
 
 
 # Extract eigenvalues and other parameters
@@ -160,6 +131,8 @@ scatter_plots = [
     for i in range(len(main_steps))
 ]
 
+fig.savefig("initial_frame.pdf", format="pdf", facecolor=fig.get_facecolor(), bbox_inches="tight")
+
 def animate(i):
     for j, scatter_plot in enumerate(scatter_plots):
         scatter_plot.set_offsets(np.c_[eigenx_steps[j][i, :], eigeny_steps[j][i, :]])
@@ -176,6 +149,7 @@ def animate(i):
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
+# ani.save("eigenvalue_animation.gif", writer="pillow", fps=10)
 
 # Display the plot
 plt.show()

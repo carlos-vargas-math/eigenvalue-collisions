@@ -22,7 +22,7 @@ def get_unordered_s_increasing_eigenvalues(initial_matrix, number_of_steps, curv
         # print(i)
         data[i]['t'] = t
         data[i]['s'] = s
-        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_flush_ginibre_toilet(initial_matrix, s, t, curve))  # Complex eigenvalues
+        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_generate_ginibre_whirlwind(initial_matrix, s, t, curve))  # Complex eigenvalues
         data[i]['ordered'] = False
         if i == 0:
             data[i]['ordered'] = True

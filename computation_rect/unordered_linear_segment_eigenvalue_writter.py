@@ -29,7 +29,7 @@ def get_eigenvalues_along_segment(initial_matrix_type, s_0, t_0, s_1, t_1, m):
         # print(i)
         data[i]['t'] = t
         data[i]['s'] = s
-        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_flush_ginibre_toilet(initial_matrix, s, t, curve))  # Complex eigenvalues
+        data[i]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_generate_ginibre_whirlwind(initial_matrix, s, t, curve))  # Complex eigenvalues
         data[i]['ordered'] = False
         if i == 0:
             data[i]['ordered'] = True

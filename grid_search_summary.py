@@ -10,6 +10,23 @@ from computation import main1
 from computation_rect import unordered_linear_segment_eigenvalue_writter
 import time
 
+def matrix_to_latex(matrix: np.ndarray) -> str:
+    if matrix.shape[0] != matrix.shape[1]:
+        raise ValueError("Input must be a square matrix")
+    
+    latex_str = "\\begin{array}{" + "c" * matrix.shape[1] + "}\\\n"
+    rows = [" & ".join(map(str, row)) for row in matrix]
+    latex_str += " \\\\ ".join(rows) + "\\\n"
+    latex_str += "\\end{array}"
+    
+    return latex_str
+
+# Example usage:
+if __name__ == "__main__":
+    A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print(matrix_to_latex(A))
+
+
 # Define the grid_search_summary dtype
 grid_search_summary_dtype = np.dtype([
     ('seed', np.int32),
@@ -21,17 +38,20 @@ grid_search_summary_dtype = np.dtype([
     ('collission_points', object)  # Placeholder for collision data
 ])
 
+
 # define parameter values
 start_time = time.time()
-seed_start = 1000
-seed_end = 1000
+seed_start = 1094
+seed_end = 1094
 seed_list = range(seed_start, seed_end + 1)
-grid_values = [16]
+grid_value = 10
+
+grid_values = [grid_value]
 dim = 10
-distribution = 'complexGaussian'
+distribution = 'bernoulli'
 remove_trace = True
-curve = curves.Curve.CIRCUIT
-grid_summary_name = "N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + ".npy"
+curve = curves.Curve.CROSSING
+grid_summary_name = "N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + str(grid_value) + ".npy"
 
 def refine_square_tracking(initial_matrix_type, s_0, t_0, s_1, t_1, m_fine, simplified_permutation):
     # Compute eigenvalues along the square path with finer resolution
@@ -140,23 +160,16 @@ for seed in seed_list:
     initial_matrix = initial_matrix_type['matrix']
 
     print("now processing seed " + str(seed))
-    
-    collisions_0 = -1
-    collisions_1 = -2
-    collisions_2 = -3
-    unprocessed_squares = -1
+    sign_matrix = np.sign(initial_matrix.real).astype(int)
 
     for grid_m in grid_values:
-        print(f"collisions_0={collisions_0}, collisions_1={collisions_1}, collisions_2={collisions_2}, unprocessed_squares={unprocessed_squares}")
-        if (collisions_0 == collisions_1 and collisions_1 == collisions_2 and unprocessed_squares == 0):
-            break
         print("now processing grid value = " + str(grid_m)) 
         dim_grid = dim * grid_m
         m_steps = 4  # Steps per subsquare
         m_fine = 16
 
         # Define the s, t ranges
-        s_min, s_max = 0.0001, 1.0
+        s_min, s_max = 0.001, 1.0
         t_min, t_max = 0.0, 1.0
 
         # Compute step size for the grid
@@ -211,7 +224,6 @@ for seed in seed_list:
                 rectangle_data, unordered_steps = s_orderer.order_s_eigenvalues(rectangle_data)
                 while_steps = 0
                 while unordered_steps > 0:
-                    print(while_steps, unordered_steps)
                     while_steps += 1
                     rectangle_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, rectangle_data, curve)
                     rectangle_data, unordered_steps = s_orderer.order_s_eigenvalues(rectangle_data)
@@ -231,11 +243,8 @@ for seed in seed_list:
                 simplified_permutation = find_permutation.omit_singletons(cycle_decomposition)
                 cycle_length_sum = find_permutation.cycle_length_sum(simplified_permutation)
                 if simplified_permutation != [] and not find_permutation.has_longer_cycles(cycle_decomposition):
-                    print("currently processing square " + str(i) + " , " + str(j))
-                    print(simplified_permutation)
                     result = refine_square_tracking(initial_matrix_type, s_0, t_0, s_1, t_1, m_fine, simplified_permutation) 
                     eigenvalue_collissions.append(result)
-                    print(result)
 
                 if find_permutation.has_longer_cycles(cycle_decomposition):
                     long_cycle_squares +=1
@@ -244,12 +253,6 @@ for seed in seed_list:
 
                 cycle_length_sum = find_permutation.cycle_length_sum(simplified_permutation)    
                 number_of_collisions += cycle_length_sum
-        collisions_2 = collisions_1
-        collisions_1 = collisions_0
-        collisions_0 = number_of_collisions
-
-        for row in eigenvalue_collissions:
-            print(row)
 
         new_entry = np.array((seed, dim, grid_m, unprocessed_squares, long_cycle_squares, number_of_collisions, eigenvalue_collissions), dtype=grid_search_summary_dtype)
         grid_search_summary_list.append(new_entry)

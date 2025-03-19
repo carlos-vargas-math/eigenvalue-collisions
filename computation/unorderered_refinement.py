@@ -1,7 +1,6 @@
 import numpy as np
 import random_matrix_model.points_on_curve as curves
 import computation.random_matrix_model as rmmodel
-import datatypes
 import datatypes1
 
 def insert_unordered_refinement_points(initial_matrix, data, curve):
@@ -14,8 +13,7 @@ def insert_unordered_refinement_points(initial_matrix, data, curve):
         if data['ordered'][i] == False:
             insert_points.append(i)
 
-    custom_dtype = datatypes.create_custom_dtype(dim)
-
+    custom_dtype = datatypes1.create_summary_item_dtype(dim)
     # Initialize the updated data array with extra space for midpoint insertions
     updated_data = np.zeros(number_of_items + len(insert_points), custom_dtype)
 
