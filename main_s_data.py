@@ -7,20 +7,14 @@ from permutation_utils import find_permutation
 import datatypes1
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 from computation import main1
+from settings import settings
 
-# set initial matrix and settings
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+seed = settings.seed
 
-# 1001 1005 1009 1017 1020 1022 1035 1038 1043 1044 1047 1048 1070 1072 1094
-
-# define parameter values
-dim = 10
-# distribution = 'complexGaussian'
-distribution = 'bernoulli'
-remove_trace = True
-curve = curves.Curve.CIRCLE
-seed = 1095
-
-compute_summary = False
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
 
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)

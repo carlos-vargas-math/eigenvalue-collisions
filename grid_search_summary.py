@@ -1,30 +1,37 @@
 import random_matrix_model.points_on_curve as curves
 import numpy as np
-from computation import unordered_s_increase_eigenvalue_writter as s_unordered
 from computation import s_eigenvalue_orderer as s_orderer
 import computation.unorderered_refinement as unorderered_refinement
 from permutation_utils import find_permutation
-import datatypes1
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
-from computation import main1
 from computation_rect import unordered_linear_segment_eigenvalue_writter
 import time
+from settings import settings
 
-def matrix_to_latex(matrix: np.ndarray) -> str:
-    if matrix.shape[0] != matrix.shape[1]:
-        raise ValueError("Input must be a square matrix")
-    
-    latex_str = "\\begin{array}{" + "c" * matrix.shape[1] + "}\\\n"
-    rows = [" & ".join(map(str, row)) for row in matrix]
-    latex_str += " \\\\ ".join(rows) + "\\\n"
-    latex_str += "\\end{array}"
-    
-    return latex_str
+# If only interested in one seed, parameters will be loaded from settings.
+load_parameters_from_settings = True
+grid_value = 10
+grid_values = [grid_value]
 
-# Example usage:
-if __name__ == "__main__":
-    A = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-    print(matrix_to_latex(A))
+# For statistics of multiple seed values, set load_parameters_from_settings = False
+start_time = time.time()
+seed_start = 1000
+seed_end = 1000
+seed_list = range(seed_start, seed_end + 1)
+dim = 10
+distribution = 'complexGaussian'
+remove_trace = True
+curve = curves.Curve.CROSSING
+grid_summary_name = "computed_examples/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"/gridm=" + str(grid_value) + ".npy"
+
+if load_parameters_from_settings:
+    dim = settings.dim
+    distribution = settings.distribution
+    remove_trace = settings.remove_trace
+    curve = settings.curve
+    seed_start = settings.seed
+    seed_list = range(seed_start, seed_start + 1)
+    grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
 
 
 # Define the grid_search_summary dtype
@@ -37,21 +44,6 @@ grid_search_summary_dtype = np.dtype([
     ('detected_collisions', np.int32),
     ('collission_points', object)  # Placeholder for collision data
 ])
-
-
-# define parameter values
-start_time = time.time()
-seed_start = 1094
-seed_end = 1094
-seed_list = range(seed_start, seed_end + 1)
-grid_value = 10
-
-grid_values = [grid_value]
-dim = 10
-distribution = 'bernoulli'
-remove_trace = True
-curve = curves.Curve.CROSSING
-grid_summary_name = "N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + str(grid_value) + ".npy"
 
 def refine_square_tracking(initial_matrix_type, s_0, t_0, s_1, t_1, m_fine, simplified_permutation):
     # Compute eigenvalues along the square path with finer resolution

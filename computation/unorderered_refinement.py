@@ -41,7 +41,7 @@ def insert_unordered_refinement_points(initial_matrix, data, curve):
         current_item = i + counter
         updated_data[current_item]['t'] = t_new
         updated_data[current_item]['s'] = s_new
-        updated_data[current_item]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_flush_ginibre_toilet(initial_matrix, s_new, t_new, curve))  # Complex eigenvalues
+        updated_data[current_item]['eigenvalues'] = np.linalg.eigvals(rmmodel.simple_generate_ginibre_whirlwind(initial_matrix, s_new, t_new, curve))  # Complex eigenvalues
         updated_data[current_item]['ordered'] = False
 
         # Update the counters

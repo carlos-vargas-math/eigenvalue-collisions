@@ -2,12 +2,18 @@ import random_matrix_model.points_on_curve as curves
 import numpy as np
 from computation import main1 as main1
 import os
-summary_file_name = "N=10&Curve.CIRCLE&Seed=1095&Distribution=bernoulli&Traceless=True.npy"
-summary_name = "computed_examples/N=10&Curve.CIRCLE&Seed=1095&Distribution=bernoulli&Traceless=True"
-# t_steps = [200, 205, 210, 215, 220, 225, 230, 235, 240, 245, 250]
-# t_steps = [250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350]
-t_steps = [10,20,30,40,50]
-# t_steps = list(range(10, 110, 10))
+from settings import settings
+
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+seed = settings.seed
+
+name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
+summary_file_name = name + ".npy"
+summary_name = "computed_examples/" + name
+t_steps = list(range(0, 110, 10))
 # print(t_steps)
 
 # 1001 1005 1009 1017 1020 1022 1035 1038 1043 1044 1047 1048 1070 1072 1094

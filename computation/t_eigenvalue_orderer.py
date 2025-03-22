@@ -22,16 +22,20 @@ def order_t_increasing_eigenvalues(data, s_data, s_step):
     # Loop over the remaining matrices to reorder the eigenvalues
     i = 1
     unordered_steps = 0
-    while i < number_of_items:
-        
+    while i < number_of_items:        
         # Copy all other fields from loaded_item to updated_data for this index
         updated_data[i] = data[i]
 
         # Get the next eigenvalues to reorder
         w = data['eigenvalues'][i]
-        
+
+        if data[i-1]['ordered'] == True:
+            updated_data[i]['eigenvalues'] = data[i]['eigenvalues']
+            new_w = data[i]['eigenvalues']
+            ordered = True
         # Computes the rearrangement of w that minimizes 
-        new_w, ordered, permutation = minimum_bipartite_matching.delaunay_bipartite_matching(z, w)
+        else: 
+            new_w, ordered, permutation = minimum_bipartite_matching.delaunay_bipartite_matching(z, w)
 
         # Update the 'eigenvalues' field in the updated_data array
         updated_data[i]['eigenvalues'] = new_w

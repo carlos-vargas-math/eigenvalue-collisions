@@ -2,15 +2,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from permutation_utils import find_permutation
+from settings import settings
 
-steps = [3,10,20,30,40,50]
-n, m = 0, 0  # collision slice indices
-loaded_data = [np.load(f"computed_examples/N=10&Curve.CIRCLE&Seed=1095&Distribution=bernoulli&Traceless=True/{step}.npy", allow_pickle=True) for step in steps]
-# grid_search_summary_array = np.load("N=10seedFrom1000To1000&Curve.CIRCLE&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-grid_search_summary_array = []
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+seed = settings.seed
 
-# non main steps scatter points are not displayed. 
-speed = 3
+summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
+steps = range(0, 110, 10)
+
+s_0=0
+s_1=0.1
+grid_m = 10
+loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
+grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
+
+speed = 10
 main_steps = range(len(steps))
 
 # Extract the dictionaries from the data
@@ -23,15 +32,6 @@ for data_dict in data_list:  # data_list contains lists of dictionaries
             rows.append((key_0, key_1, value_0, value_1, value_2))
 
 # Sort the rows by value_0 (third element in each tuple)
-rows.sort(key=lambda x: x[2])
-print("number of collisions = " +str(len(rows)))
-
-# Print results
-index=0
-for row in rows:
-    print(str(index) +", " + str(row))
-    index +=1
-
 
 # Extract eigenvalues and other parameters
 eigenvalues_all_steps = [data["eigenvalues"] for data in loaded_data]
@@ -68,7 +68,17 @@ ax.set_ylim(-1.2, 1.2)
 ax.set_aspect('equal', 'box')
 
 # Choose a sublist of rows to include in the scatter plot
-sublist_points = [(row[4].real, row[4].imag, row[3]) for row in rows[n:m]]  # Extract (x, y, value_1)
+sublist_points = []
+for row in rows:
+    if (s_0 <= row[2] and row[2] < s_1):
+        sublist_points.append((row[4].real, row[4].imag, row[3], row[2]))  # Extract (x, y, value_1)
+
+# Print results
+index=0
+for row in sublist_points:
+    print(str(index) +", " + str(row))
+    index +=1
+
 
 # Convert to x and y coordinates
 sublist_x = [z[0] for z in sublist_points]
@@ -149,7 +159,7 @@ def animate(i):
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
-# ani.save("eigenvalue_animation.gif", writer="pillow", fps=10)
+ani.save("eigenvalue_animation.gif", writer="pillow", fps=10)
 
 # Display the plot
 plt.show()
