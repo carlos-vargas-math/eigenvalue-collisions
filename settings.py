@@ -8,5 +8,9 @@ class Settings:
     remove_trace: bool = True
     curve: object = points_on_curve.Curve.CIRCLE
     seed: int = 1000
+    seed_end: int = 1000
+    grid_m: int = 5
+    s_steps: int = 1000
+    t_steps: int = 1000
 
 settings = Settings()

@@ -9,13 +9,13 @@ distribution = settings.distribution
 remove_trace = settings.remove_trace
 curve = settings.curve
 seed = settings.seed
+grid_m = settings.grid_m
 
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
 steps = range(0, 110, 10)
 
 s_0=0
 s_1=0.1
-grid_m = 10
 loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
 grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
 

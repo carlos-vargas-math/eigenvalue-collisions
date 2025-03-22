@@ -8,30 +8,22 @@ from computation_rect import unordered_linear_segment_eigenvalue_writter
 import time
 from settings import settings
 
-# If only interested in one seed, parameters will be loaded from settings.
-load_parameters_from_settings = True
-grid_value = 10
-grid_values = [grid_value]
 
 # For statistics of multiple seed values, set load_parameters_from_settings = False
 start_time = time.time()
-seed_start = 1000
-seed_end = 1000
+seed_start = settings.seed
+seed_end = settings.seed_end
 seed_list = range(seed_start, seed_end + 1)
-dim = 10
-distribution = 'complexGaussian'
-remove_trace = True
-curve = curves.Curve.CROSSING
-grid_summary_name = "computed_examples/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"/gridm=" + str(grid_value) + ".npy"
-
-if load_parameters_from_settings:
-    dim = settings.dim
-    distribution = settings.distribution
-    remove_trace = settings.remove_trace
-    curve = settings.curve
-    seed_start = settings.seed
-    seed_list = range(seed_start, seed_start + 1)
+grid_value = settings.grid_m
+grid_values = [grid_value]
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+if seed_end == seed_start:
     grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
+else:
+    grid_summary_name = "computed_examples/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"/gridm=" + str(grid_value) + ".npy"
 
 
 # Define the grid_search_summary dtype
