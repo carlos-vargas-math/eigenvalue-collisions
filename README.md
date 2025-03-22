@@ -16,24 +16,26 @@ or to collect statistical data about eigenvalue collisions for a range of seeds.
 
 ### One seed
 
-Go to settings.py and specify the seed (for reproductibility) 
-and other parameters in the model (s_steps, t_steps).
+1. Go to settings.py and specify the seed (for reproductibility) 
+and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 
-1. Go to main_s_data to initialize a summary. This will order the eigenvalues from
+2. Go to main_s_data.py to initialize a summary. This will order the eigenvalues from
 R(0,0) to R(1,0), along the curve t=0 in s_steps.
 
-2. Go to main_t_data to compute the eigenvalue tracks for several values of s_step. 
+3. Go to main_t_data.py to compute the eigenvalue tracks for the s_step of your choice. 
 For each selected s, the algorithm will order the eigenvalues of
-R(s,0) to R(s,1) in t_steps.
+R(s,0) to R(s,1) in t_steps, to figure out the cycles/tracks.
 
-3. Go to grid_search_summary and compute the
+4. Go to grid_search_summary and compute the eigenvalue collisions. 
 
-4. Once these tracks have been calculated, indicate the steps that will be displayed in the animation (these must have been computed in the previous step).
-
+5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py (these must have been computed in the previous step).
 
 ### Several seeds
 
+1. Go to settings.py and specify the seed_end > seed 
+and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 
+2. Go to grid_search_summary and compute the eigenvalue collisions. 
 
 ## License
 MIT License
