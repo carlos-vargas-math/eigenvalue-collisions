@@ -28,7 +28,7 @@ R(s,0) to R(s,1) in t_steps, to figure out the cycles/tracks.
 
 4. Go to grid_search_summary and compute the eigenvalue collisions. 
 
-5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py (these must have been computed in the previous step).
+5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py
 
 ### Several seeds
 
@@ -36,6 +36,8 @@ R(s,0) to R(s,1) in t_steps, to figure out the cycles/tracks.
 and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 
 2. Go to grid_search_summary and compute the eigenvalue collisions. 
+
+3. Go to read_grid_summary to get basic statistics about the eigenvalue collisions. 
 
 ## License
 MIT License

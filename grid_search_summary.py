@@ -23,7 +23,7 @@ curve = settings.curve
 if seed_end == seed_start:
     grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
 else:
-    grid_summary_name = "computed_examples/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"/gridm=" + str(grid_value) + ".npy"
+    grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
 
 
 # Define the grid_search_summary dtype

@@ -1,30 +1,23 @@
 import numpy as np
 import matplotlib.pyplot as plt
-# grid_search_summary_array = np.load("N=10seedFrom1000To1099&Curve.CIRCLE&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom1000To1049&Curve.CIRCUIT&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=20seedFrom1000To1005&Curve.CIRCLE&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=20seedFrom1000To1001&Curve.CIRCUIT&Distribution=complexGaussian&Traceless=True.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom1051To1100&Curve.CIRCUIT&Distribution=ginibreMeander&Traceless=False.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom2000To2100&Curve.CIRCUIT&Distribution=ginibreMeander&Traceless=False5.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom2000To2100&Curve.CIRCUIT&Distribution=complexGaussian&Traceless=False.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom2000To2100&Curve.CIRCUIT&Distribution=complexGaussian&Traceless=False5.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom2000To2100&Curve.CIRCLE&Distribution=complexGaussian&Traceless=False5.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=10seedFrom1000To1100&Curve.CIRCLE&Distribution=bernoulli&Traceless=True5.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=11seedFrom1000To1010&Curve.CROSSING&Distribution=opposingSectors&Traceless=False6.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=11seedFrom1000To1010&Curve.CROSSING&Distribution=opposingSectors&Traceless=True6.npy", allow_pickle=True)
-# grid_search_summary_array = np.load("N=11seedFrom1000To1100&Curve.CROSSING&Distribution=complexGaussian&Traceless=False5.npy", allow_pickle=True)
-grid_search_summary_array = np.load("N=11seedFrom1000To1100&Curve.CROSSING&Distribution=opposingSectors&Traceless=False5.npy", allow_pickle=True)
+from settings import settings
 
-# grid_search_summary_array = np.load('grid_search_summary/grid_search_summary.npy', allow_pickle=True)
-# grid_search_summary_array = np.load('grid_search_summary/grid_search_summaryN5Circuit.npy', allow_pickle=True)
+# For statistics of multiple seed values, set load_parameters_from_settings = False
+seed_start = settings.seed
+seed_end = settings.seed_end
+seed_list = range(seed_start, seed_end + 1)
+grid_value = settings.grid_m
+grid_values = [grid_value]
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+if seed_end == seed_start:
+    grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
+else:
+    grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
 
-# for row in grid_search_summary_array:  
-#     print(str(row[0]) + " | " + str(row[1]) + " | " + str(row[2]) + " | "  + str(row[3]) + " | "  + str(row[4]) + " | " + str(row[5]))
-
-for row in grid_search_summary_array:
-    if (row[5] != 90):  
-        print(str(row[0]) + " | " + str(row[1]) + " | " + str(row[2]) + " | "  + str(row[3]) + " | "  + str(row[4]) + " | " + str(row[5]))
-
+grid_search_summary_array = np.load(grid_summary_name, allow_pickle=True)
 
 last_rows = {}
 

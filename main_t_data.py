@@ -13,7 +13,7 @@ seed = settings.seed
 name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
 summary_file_name = name + ".npy"
 summary_name = "computed_examples/" + name
-t_steps = list(range(0, 110, 10))
+t_steps = list(range(0, 810, 10))
 
 loaded_s_data = np.load(summary_file_name, allow_pickle=True)
 initial_matrix_data = loaded_s_data['initial_matrix']

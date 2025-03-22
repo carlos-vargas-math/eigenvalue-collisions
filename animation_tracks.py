@@ -12,12 +12,16 @@ seed = settings.seed
 grid_m = settings.grid_m
 
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
-steps = range(0, 110, 10)
+# steps = range(0, 110, 10)   # steps 0, 10, 20, ..., 100
+# steps = range(100, 210, 10) # steps 100, 110, 120, ..., 200
+# steps = range(200, 310, 10) # steps 200, 210, 220, ..., 300
+steps = range(300, 410, 10) #
 
-s_0=0
-s_1=0.1
 loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
 grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
+delta_s = 1/(settings.s_steps)
+s_0=steps[0]* delta_s
+s_1=steps[-1]* delta_s
 
 speed = 10
 main_steps = range(len(steps))

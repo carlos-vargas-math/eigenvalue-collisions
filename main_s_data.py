@@ -26,8 +26,6 @@ initial_s_steps = settings.s_steps
 
 s_data = main1.comptute_s_data(initial_matrix, initial_s_steps, curve)
 
-np.save('ordered_s_eigenvalues.npy', s_data)
-
 # Create a structured array instance using the Ginibre summary dtype
 actual_s_steps = s_data.size
 ginibre_summary_dtype = datatypes1.create_ginibre_summary_dtype(dim, actual_s_steps)
