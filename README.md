@@ -1,10 +1,28 @@
-Main
-1. initalize an eigenvalue summary with main_s_data.py
-2. compute rotation process at a given s_step using main_t_data.py
-3. run animation.py for visualization of the rotating process.
+# Eigenvalue Collisions
 
-ToDo/Fix
-1. Compute some more relevant data for summary/animation such as: estimate collision values (i,j,s,t) and smallest distances (summary), Delaunay triangulations (animation).
-2. Method to insert an s_step in between consecutive steps that differ by a permutation with some cycle > 3 (so that the precise collisions are properly accounted for).
+This package analyzes eigenvalue collisions in a periodic matrix-valued function R(s, t). It tracks eigenvalues on curves to detect eigenvalue collisions.
+
+Make sure to have the following dependencies installed
+
+## Dependencies
+- NumPy
+- SciPy
+- Matplotlib (optional, for visualization)
+
+## Usage
+
+The methods in this package can be used to compute eigenvalue collisions for a specific seed
+or to collect statistical data about eigenvalue collisions for a range of seeds.
+
+### One seed
+
+Go to settings.py and specify the seed and other parameters in the model
+
+### Several seeds
+
+
+## License
+MIT License
+
 
 
