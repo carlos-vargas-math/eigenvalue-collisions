@@ -26,7 +26,7 @@ R(0,0) to R(1,0), along the curve t=0 in s_steps.
 For each selected s, the algorithm will order the eigenvalues of
 R(s,0) to R(s,1) in t_steps, to figure out the cycles/tracks.
 
-4. Run grid_search_summary and compute the eigenvalue collisions. 
+4. Run grid_search_summary.py and compute the eigenvalue collisions. 
 
 5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py and run it.
 
@@ -35,9 +35,9 @@ R(s,0) to R(s,1) in t_steps, to figure out the cycles/tracks.
 1. Go to settings.py and specify the seed_end > seed 
 and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 
-2. Run grid_search_summary and compute the eigenvalue collisions. 
+2. Run grid_search_summary.py and compute the eigenvalue collisions. 
 
-3. Run to read_grid_summary to get basic statistics about the eigenvalue collisions. 
+3. Run to read_grid_summary.py to get basic statistics about the eigenvalue collisions. 
 
 ## License
 MIT License
