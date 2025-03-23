@@ -4,6 +4,12 @@ import matplotlib.animation as animation
 from permutation_utils import find_permutation
 from settings import settings
 
+# steps = range(0, 110, 10)   # steps 0, 10, 20, ..., 100
+# steps = range(100, 210, 10) # steps 100, 110, 120, ..., 200
+# steps = range(200, 310, 10) # steps 200, 210, 220, ..., 300
+steps = range(500, 610, 0) #
+speed = 5
+
 dim = settings.dim
 distribution = settings.distribution
 remove_trace = settings.remove_trace
@@ -12,10 +18,6 @@ seed = settings.seed
 grid_m = settings.grid_m
 
 summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
-# steps = range(0, 110, 10)   # steps 0, 10, 20, ..., 100
-# steps = range(100, 210, 10) # steps 100, 110, 120, ..., 200
-# steps = range(200, 310, 10) # steps 200, 210, 220, ..., 300
-steps = range(300, 410, 10) #
 
 loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
 grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
@@ -23,7 +25,6 @@ delta_s = 1/(settings.s_steps)
 s_0=steps[0]* delta_s
 s_1=steps[-1]* delta_s
 
-speed = 10
 main_steps = range(len(steps))
 
 # Extract the dictionaries from the data
@@ -145,8 +146,6 @@ scatter_plots = [
     for i in range(len(main_steps))
 ]
 
-fig.savefig("initial_frame.pdf", format="pdf", facecolor=fig.get_facecolor(), bbox_inches="tight")
-
 def animate(i):
     for j, scatter_plot in enumerate(scatter_plots):
         scatter_plot.set_offsets(np.c_[eigenx_steps[j][i, :], eigeny_steps[j][i, :]])
@@ -163,7 +162,7 @@ def animate(i):
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
-ani.save("eigenvalue_animation.gif", writer="pillow", fps=10)
+ani.save("animations/eigenvalue_animation.gif", writer="pillow", fps=10)
 
 # Display the plot
 plt.show()
