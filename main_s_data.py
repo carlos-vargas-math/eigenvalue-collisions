@@ -8,6 +8,7 @@ import datatypes1
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 from computation import main1
 from settings import settings
+import os
 
 dim = settings.dim
 distribution = settings.distribution
@@ -15,7 +16,7 @@ remove_trace = settings.remove_trace
 curve = settings.curve
 seed = settings.seed
 
-summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
+summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&" + str(distribution) + "&Traceless=" + str(remove_trace)
 
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)
 initial_matrix = initial_matrix_type['matrix']
@@ -36,4 +37,12 @@ ginibre_summary['initial_matrix'] = initial_matrix_type
 
 # Populate the Ginibre summary and save
 ginibre_summary['summary_items'] = s_data
-np.save(summary_name, ginibre_summary)
+
+# Ensure the directory exists
+os.makedirs(summary_name, exist_ok=True)
+
+# Save the file
+filename = os.path.join(summary_name, "summary.npy")
+# np.save(filename, s_data)
+
+np.save(filename, ginibre_summary)

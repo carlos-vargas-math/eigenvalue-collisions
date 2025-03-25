@@ -1,28 +1,20 @@
 import numpy as np
-import uuid
 from random_matrix_model import points_on_curve
 import sys
 import os
-import matplotlib.pyplot as plt
 from scipy.stats import unitary_group
+import datatypes1
+from enum import Enum
 
 # Add the root directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import datatypes1
 
-def plot_eigenvalues(eigenvalues, title="Eigenvalues"):
-    plt.figure(figsize=(8, 8))
-    plt.scatter(np.real(eigenvalues), np.imag(eigenvalues), color='blue', alpha=0.6)
-    plt.axhline(0, color='black', linewidth=0.5, linestyle='--')
-    plt.axvline(0, color='black', linewidth=0.5, linestyle='--')
-    plt.xlabel("Re(z)")
-    plt.ylabel("Im(z)")
-    plt.xlim(-1.1, 1.1)  # Set x-axis limits
-    plt.ylim(-1.1, 1.1)  # Set y-axis limits    
-    plt.title(title)
-    plt.grid(True, linestyle='--', alpha=0.6)
-    plt.show()
-
+class Distribution(Enum):
+    BERNOULLI = "bernoulli"
+    COMPLEX_GAUSSIAN = "complexGaussian"
+    REAL_GAUSSIAN = "realGaussian"
+    GINIBRE_MEANDER = "ginibreMeander"
+    OPPOSING_SECTORS = "opposingSectors"
 
 def generate_opposing_sectors(dim, seed=None):
     """Generates a matrix with eigenvalues constrained to the upper-left or lower-right sectors."""
@@ -108,46 +100,34 @@ def generate_ginibre_meander(dim, seed=None):
     transformed_matrix = U @ D @ U.conj().T  # This ensures eigenvalues stay the same
     return transformed_matrix
 
-
-def generate_initial_matrix(dim, distribution, remove_trace=True, seed=None, curve=points_on_curve.Curve.CIRCLE):
+def generate_initial_matrix(dim, distribution: Distribution, remove_trace=True, seed=None, curve=points_on_curve.Curve.CIRCLE):
     sigma = 1/np.sqrt(2*dim)
-    # Create a random number generator
     rng = np.random.default_rng(seed)
     
-    # Initialize properties string
-    properties = f'distribution={distribution}'
-
-    # Generate random complex numbers for the initial case
+    properties = f'distribution={distribution.value}'
+    
     s = np.array([complex(rng.normal(0, sigma), rng.normal(0, sigma)) for _ in range(dim * dim)])
 
-    # Adjust the numbers for the specified distribution
-    if distribution == 'realGaussian':
-        properties = 'distribution=realGaussian'
-        s = np.array([complex(np.sqrt(2)*x.real, 0) for x in s])  # Set imaginary part to zero
-    elif distribution == 'bernoulli':
-        properties = 'distribution=Bernoulli'
-        s = np.array([complex(np.sqrt(1 / dim) * np.sign(x.real), 0) for x in s])  # Take sign of the real part
-
-    # Reshape to a dim x dim matrix
+    if distribution == Distribution.REAL_GAUSSIAN:
+        s = np.array([complex(np.sqrt(2) * x.real, 0) for x in s])
+    elif distribution == Distribution.BERNOULLI:
+        s = np.array([complex(np.sqrt(1 / dim) * np.sign(x.real), 0) for x in s])
+    
     ginibre = s.reshape((dim, dim))
-    if distribution == 'ginibreMeander':
+    
+    if distribution == Distribution.GINIBRE_MEANDER:
         ginibre = generate_ginibre_meander(dim, seed)
-        properties = ";distribution=ginibreMeander"  # Mark that it's a filtered matrix
-
-    if distribution == 'opposingSectors':
+    elif distribution == Distribution.OPPOSING_SECTORS:
         ginibre = generate_opposing_sectors(dim, seed)
-        properties = ";distribution=opposingSectors"  # Mark that it's a filtered matrix
-
-    # Remove the trace if required
+    
     if remove_trace:
         np.fill_diagonal(ginibre, 0)
         properties += ";traceless=true"
     
-    # Create the structured array using the initial_matrix dtype
     initial_matrix_dtype = datatypes1.create_initial_matrix_dtype(dim)
     result = np.zeros((), dtype=initial_matrix_dtype)
     result['matrix'] = ginibre
-    result['seed'] = seed if seed is not None else -1  # Store the seed; -1 indicates no seed was set
+    result['seed'] = seed if seed is not None else -1
     result['properties'] = properties
     result['curve'] = curve
     

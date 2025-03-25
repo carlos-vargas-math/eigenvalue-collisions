@@ -7,7 +7,9 @@ from settings import settings
 # steps = range(0, 110, 10)   # steps 0, 10, 20, ..., 100
 # steps = range(100, 210, 10) # steps 100, 110, 120, ..., 200
 # steps = range(200, 310, 10) # steps 200, 210, 220, ..., 300
-steps = range(500, 610, 0) #
+# steps = [0,4,5,6,7,8,9,10,20,30,40,50] #
+
+steps = range(0, 110, 10) #
 speed = 5
 
 dim = settings.dim
@@ -17,7 +19,7 @@ curve = settings.curve
 seed = settings.seed
 grid_m = settings.grid_m
 
-summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace)
+summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&" + str(distribution) + "&Traceless=" + str(remove_trace)
 
 loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
 grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
@@ -96,7 +98,8 @@ scatter_special = ax.scatter(
     s=100,
     c="white",
     marker="x",
-    alpha=0.8
+    alpha=0.8,
+    zorder=3
 )
 
 # Plot tracks for all steps
@@ -141,7 +144,8 @@ scatter_plots = [
         c=colors_steps[i],
         marker=".",
         edgecolor='none',
-        alpha=0.7  # Adjust opacity for visibility
+        alpha=0.7,
+        zorder=2
     )
     for i in range(len(main_steps))
 ]
@@ -157,8 +161,7 @@ def animate(i):
 
     scatter_special.set_color(new_colors)  # Update colors dynamically
 
-    ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s = {s[i]:.4f}", color='white')
-
+    ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
