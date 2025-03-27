@@ -1,6 +1,6 @@
 # Eigenvalue Collisions
 
-This package locates eigenvalue collisions for periodic matrix-valued functions R(s, t). 
+This package locates eigenvalue collisions for t-periodic matrix-valued functions R(s, t). 
 It tracks eigenvalues continuously along curves to detect eigenvalue collisions.
 
 Make sure to have the following dependencies installed.
@@ -15,13 +15,19 @@ Make sure to have the following dependencies installed.
 The methods in this package can be used to compute eigenvalue collisions for a specific seed
 or to collect statistical data about eigenvalue collisions for a range of seeds.
 
+### Getting started
+
+First, take a look at main_animation.mp4 to get an instant glimpse on what the methods in this package compute.
+
 ### One seed
 
 1. Go to settings.py and specify the seed (for reproductibility) 
 and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 Set seed = seed_end to avoid calculating data that you won't need.
 
-2. Run main_s_data.py to initialize a summary. This will order the eigenvalues from
+
+2. Run main_s_data.py to initialize a summary. 
+This will order the eigenvalues from
 R(0,0) to R(1,0), along the curve t=0 into s_steps.
 
 3. Run main_t_data.py to compute the eigenvalue tracks for the s-steps of your choice. 
