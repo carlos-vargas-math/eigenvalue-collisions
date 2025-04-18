@@ -1,11 +1,11 @@
 import numpy as np
-from random_matrix_model import points_on_curve
+from settings import Curve
 
 def create_initial_matrix_dtype(dim):
     initial_matrix_dtype = np.dtype([
         ('matrix', np.complex128, (dim, dim)),  # dim x dim complex matrix
         ('seed', np.integer),  # seed number (for reproducibility)
-        ('curve', points_on_curve.Curve),  # Curve enum type
+        ('curve', Curve),  # Curve enum type
         ('properties', np.unicode_, 100)  # String properties
     ])
     return initial_matrix_dtype

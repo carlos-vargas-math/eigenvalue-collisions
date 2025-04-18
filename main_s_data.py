@@ -7,7 +7,7 @@ from permutation_utils import find_permutation
 import datatypes1
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 from computation import main1
-from settings import settings
+from settings import settings, generate_directory_name
 import os
 
 dim = settings.dim
@@ -16,7 +16,7 @@ remove_trace = settings.remove_trace
 curve = settings.curve
 seed = settings.seed
 
-summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&" + str(distribution) + "&Traceless=" + str(remove_trace)
+summary_name = generate_directory_name()
 
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)
 initial_matrix = initial_matrix_type['matrix']

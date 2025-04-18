@@ -2,7 +2,7 @@ import random_matrix_model.points_on_curve as curves
 import numpy as np
 from computation import main1 as main1
 import os
-from settings import settings
+from settings import settings, generate_directory_name
 
 dim = settings.dim
 distribution = settings.distribution
@@ -10,9 +10,15 @@ remove_trace = settings.remove_trace
 curve = settings.curve
 seed = settings.seed
 
-summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&" + str(distribution) + "&Traceless=" + str(remove_trace)
+summary_name = generate_directory_name()
 summary_file_name = summary_name + "/summary.npy"
-t_steps = list(range(0, 110, 10))
+
+t_steps = list(range(0,210, 20))
+# t_steps = list(range(1000,2010, 20))
+# t_steps = list(range(111, 120, 1))
+# t_steps = [1000, 1100, 1110, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]
+# t_steps = [1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1179]
+
 
 loaded_s_data = np.load(summary_file_name, allow_pickle=True)
 initial_matrix_data = loaded_s_data['initial_matrix']

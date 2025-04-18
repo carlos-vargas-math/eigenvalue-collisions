@@ -4,19 +4,13 @@ import os
 from scipy.stats import unitary_group
 import datatypes1
 from enum import Enum
-from settings_ellipse import SettingsEllipse
-a = SettingsEllipse.a
+from settings import Distribution
+from settings import Settings
+a = Settings.a
 
 # Add the root directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-class Distribution(Enum):
-    BERNOULLI = "bernoulli"
-    COMPLEX_GAUSSIAN = "complexGaussian"
-    REAL_GAUSSIAN = "realGaussian"
-    GINIBRE_MEANDER = "ginibreMeander"
-    OPPOSING_SECTORS = "opposingSectors"
-    ELLIPTIC_LAW = "elipticLaw"
 
 # Given a
 b = 1 / a

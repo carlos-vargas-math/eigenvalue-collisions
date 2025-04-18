@@ -4,15 +4,9 @@ from matplotlib.animation import FuncAnimation
 from scipy.integrate import cumulative_trapezoid
 from scipy.interpolate import interp1d
 from enum import Enum
-from settings_ellipse import SettingsEllipse
-s = SettingsEllipse.a
-
-class Curve(Enum):
-    ZERO = 1
-    CIRCLE = 2
-    CIRCUIT = 3
-    CROSSING = 4
-    ELLIPSE = 5
+from settings import Curve
+from settings import Settings
+s = Settings.a
 
 def parametrized_curve(n, curve_type:Curve, shift): 
     z = np.zeros(n, dtype=complex)
