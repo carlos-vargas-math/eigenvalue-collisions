@@ -5,22 +5,22 @@ from random_matrix_model import points_on_curve
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 import random_matrix_model.points_on_curve as curves
 import computation.random_matrix_model as rmmodel
+from settings import settings
 
-# Define parameter values
-dim = 10
-distribution = 'bernoulli'
-remove_trace = True
-curve = curves.Curve.CIRCLE
-seed = 1070
+dim = settings.dim
+distribution = settings.distribution
+remove_trace = settings.remove_trace
+curve = settings.curve
+seed = settings.seed
 
 # Generate initial matrix C
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)
 initial_matrix = initial_matrix_type['matrix']
 
 # Define animation parameters
-s_0, s_1 = 0.00001, 1
+s_0, s_1 = 0.5, 0.6
 s_step = 0.0001
-t_steps = 100
+t_steps = 1000
 s_increase = s_step / t_steps
 s = s_0
 

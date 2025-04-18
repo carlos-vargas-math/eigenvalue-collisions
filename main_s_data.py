@@ -23,7 +23,6 @@ initial_matrix = initial_matrix_type['matrix']
 
 # Define the number of initial summary steps and initial rotation steps
 initial_s_steps = settings.s_steps
-# initial_t_steps = 1000
 
 s_data = main1.comptute_s_data(initial_matrix, initial_s_steps, curve)
 

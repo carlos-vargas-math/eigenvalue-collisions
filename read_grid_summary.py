@@ -13,9 +13,9 @@ distribution = settings.distribution
 remove_trace = settings.remove_trace
 curve = settings.curve
 if seed_end == seed_start:
-    grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
+    grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&" + str(distribution) + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
 else:
-    grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&Distribution=" + distribution + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
+    grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&" + str(distribution) + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
 
 grid_search_summary_array = np.load(grid_summary_name, allow_pickle=True)
 

@@ -1,10 +1,11 @@
 import numpy as np
-from random_matrix_model import points_on_curve
 import sys
 import os
 from scipy.stats import unitary_group
 import datatypes1
 from enum import Enum
+from settings_ellipse import SettingsEllipse
+a = SettingsEllipse.a
 
 # Add the root directory to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -15,6 +16,24 @@ class Distribution(Enum):
     REAL_GAUSSIAN = "realGaussian"
     GINIBRE_MEANDER = "ginibreMeander"
     OPPOSING_SECTORS = "opposingSectors"
+    ELLIPTIC_LAW = "elipticLaw"
+
+# Given a
+b = 1 / a
+rho = (a**2 - b**2) / (a**2 + b**2)
+
+def generate_elliptic_matrix(dim, rho, seed=None):
+    rng = np.random.default_rng(seed)
+    sigma = 1 / np.sqrt(dim)
+
+    G1 = rng.normal(0, sigma, (dim, dim))
+    G2 = rng.normal(0, sigma, (dim, dim))
+
+    real_part = np.sqrt((1 + rho) / 2) * G1
+    imag_part = np.sqrt((1 - rho) / 2) * G2
+
+    return real_part + 1j * imag_part
+
 
 def generate_opposing_sectors(dim, seed=None):
     """Generates a matrix with eigenvalues constrained to the upper-left or lower-right sectors."""
@@ -53,7 +72,6 @@ def generate_opposing_sectors(dim, seed=None):
     transformed_matrix = U @ D @ U.conj().T
     
     return transformed_matrix
-
 
 def generate_ginibre_meander(dim, seed=None):
     """Generates a Ginibre meander matrix with a structured eigenvalue selection process."""
@@ -100,14 +118,12 @@ def generate_ginibre_meander(dim, seed=None):
     transformed_matrix = U @ D @ U.conj().T  # This ensures eigenvalues stay the same
     return transformed_matrix
 
-def generate_initial_matrix(dim, distribution: Distribution, remove_trace=True, seed=None, curve=points_on_curve.Curve.CIRCLE):
+def generate_initial_matrix(dim, distribution: Distribution, remove_trace, seed, curve):
     sigma = 1/np.sqrt(2*dim)
     rng = np.random.default_rng(seed)
     
     properties = f'distribution={distribution.value}'
-    
     s = np.array([complex(rng.normal(0, sigma), rng.normal(0, sigma)) for _ in range(dim * dim)])
-
     if distribution == Distribution.REAL_GAUSSIAN:
         s = np.array([complex(np.sqrt(2) * x.real, 0) for x in s])
     elif distribution == Distribution.BERNOULLI:
@@ -118,7 +134,9 @@ def generate_initial_matrix(dim, distribution: Distribution, remove_trace=True, 
     if distribution == Distribution.GINIBRE_MEANDER:
         ginibre = generate_ginibre_meander(dim, seed)
     elif distribution == Distribution.OPPOSING_SECTORS:
-        ginibre = generate_opposing_sectors(dim, seed)
+        ginibre = generate_opposing_sectors(dim, seed)    
+    elif distribution == Distribution.ELLIPTIC_LAW:
+        ginibre = np.sqrt(1-a)*ginibre + np.sqrt(a)*ginibre.conj().T     
     
     if remove_trace:
         np.fill_diagonal(ginibre, 0)
