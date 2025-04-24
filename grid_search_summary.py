@@ -6,7 +6,7 @@ from permutation_utils import find_permutation
 import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 from computation_rect import unordered_linear_segment_eigenvalue_writter
 import time
-from settings import settings
+from settings import settings, generate_directory_name
 
 
 # For statistics of multiple seed values, set load_parameters_from_settings = False
@@ -21,7 +21,7 @@ distribution = settings.distribution
 remove_trace = settings.remove_trace
 curve = settings.curve
 if seed_end == seed_start:
-    grid_summary_name = "computed_examples/N=" + str(dim) + "&" + str(curve)  + "&Seed=" + str(seed_start)  + "&" + str(distribution) + "&Traceless=" + str(remove_trace) + "/gridm=" + str(grid_value) + ".npy"
+    grid_summary_name = generate_directory_name() + "/gridm=" + str(grid_value) + ".npy"
 else:
     grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&" + str(distribution) + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
 

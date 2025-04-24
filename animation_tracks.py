@@ -2,15 +2,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from permutation_utils import find_permutation
-from settings import settings
+from settings import settings, generate_directory_name
 
 # steps = range(0, 110, 10)   # steps 0, 10, 20, ..., 100
 # steps = range(100, 210, 10) # steps 100, 110, 120, ..., 200
 # steps = range(200, 310, 10) # steps 200, 210, 220, ..., 300
 # steps = [0,4,5,6,7,8,9,10,20,30,40,50] #
 
-steps = range(0, 110, 10) #
-speed = 5
+steps = list(range(0, 210, 20))
+# steps = list(range(800, 1010, 20))
+# steps = list(range(110, 120, 1))
+# steps = [1000, 1100, 1110, 1120, 1130, 1140, 1150, 1160, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1179, 1180, 1190, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]
+speed = 1
 
 dim = settings.dim
 distribution = settings.distribution
@@ -19,10 +22,11 @@ curve = settings.curve
 seed = settings.seed
 grid_m = settings.grid_m
 
-summary_name = "N=" + str(dim) + "&" + str(curve) + "&Seed=" + str(seed) + "&" + str(distribution) + "&Traceless=" + str(remove_trace)
+distribution_name = str(distribution)
+summary_name = generate_directory_name()
 
-loaded_data = [np.load(f"computed_examples/{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
-grid_search_summary_array = np.load("computed_examples/"+ summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
+loaded_data = [np.load(f"{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
+grid_search_summary_array = np.load(summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
 delta_s = 1/(settings.s_steps)
 s_0=steps[0]* delta_s
 s_1=steps[-1]* delta_s
@@ -39,6 +43,7 @@ for data_dict in data_list:  # data_list contains lists of dictionaries
             rows.append((key_0, key_1, value_0, value_1, value_2))
 
 # Sort the rows by value_0 (third element in each tuple)
+rows.sort(key=lambda x: x[2])
 
 # Extract eigenvalues and other parameters
 eigenvalues_all_steps = [data["eigenvalues"] for data in loaded_data]
@@ -70,8 +75,8 @@ fig, ax = plt.subplots()
 ax.set_facecolor("black")
 fig.patch.set_facecolor("black")
 ax.tick_params(colors='white')
-ax.set_xlim(-1.2, 1.2)
-ax.set_ylim(-1.2, 1.2)
+ax.set_xlim(-4.2, 4.2)
+ax.set_ylim(-2.2, 2.2)
 ax.set_aspect('equal', 'box')
 
 # Choose a sublist of rows to include in the scatter plot
@@ -165,7 +170,8 @@ def animate(i):
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
-ani.save("animations/eigenvalue_animation.gif", writer="pillow", fps=10)
+# ani = animation.FuncAnimation(fig, animate, frames=range(3490, 3491, speed), interval=100)
+# ani.save("animations/eigenvalue_animation.gif", writer="pillow", fps=10)
 
 # Display the plot
 plt.show()
