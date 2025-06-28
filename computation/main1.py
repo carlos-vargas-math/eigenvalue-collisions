@@ -51,6 +51,6 @@ def comptute_s_data(initial_matrix, initial_s_steps, curve):
     s_data = s_unordered.get_unordered_s_increasing_eigenvalues(initial_matrix, initial_s_steps, curve)
     s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
     while unordered_steps > 0:
-        s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, curve)
+        s_data = unorderered_refinement.insert_unordered_refinement_points(initial_matrix, s_data, curve)
         s_data, unordered_steps = s_orderer.order_s_eigenvalues(s_data)
     return s_data
