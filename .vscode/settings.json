@@ -1,0 +1,24 @@
+{
+    "cSpell.enabled": true,
+    "cSpell.enabledLanguageIds": [
+      "plaintext",
+      "markdown",
+      "latex",
+      "tex"
+    ],
+    "cSpell.ignoreRegExpList": [
+      "\\\\[a-zA-Z]+",
+      "\\\\begin\\{[^}]*\\}",
+      "\\\\end\\{[^}]*\\}",
+      "\\$[^$]*\\$"
+    ],
+    "cSpell.words": [
+      "documentclass",
+      "textbf",
+      "bibliography",
+      "maketitle"
+    ],
+    "cSpell.enabledSchemes": {
+      "file": false
+    }
+  }

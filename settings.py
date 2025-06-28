@@ -18,16 +18,16 @@ class Distribution(Enum):
 
 @dataclass
 class Settings:
-    dim: int = 10
-    distribution: object = Distribution.ELLIPTIC_LAW
+    dim: int = 100
+    distribution: object = Distribution.COMPLEX_GAUSSIAN
     remove_trace: bool = False
-    curve: object = Curve.ELLIPSE
-    seed: int = 2006
-    seed_end: int = 2006
-    grid_m: int = 6
+    curve: object = Curve.CIRCLE
+    seed: int = 2007
+    seed_end: int = 2007
+    grid_m: int = 2
     s_steps: int = 2000
     t_steps: int = 1000
-    a: float = 0.025
+    a: float = 0.35
 
 settings = Settings()
 

@@ -17,14 +17,14 @@ or to collect statistical data about eigenvalue collisions for a range of seeds.
 
 ### Getting started
 
-First, take a look at main_animation.mp4 to get an instant glimpse on what the methods in this package compute.
+First, take a look at main_animation.mp4 to get an instant glimpse of the
+main objects that concern the methods in this package.
 
 ### One seed
 
 1. Go to settings.py and specify the seed (for reproductibility) 
 and other parameters in the model (dimension, curve, distribution, s_steps, t_steps, m_grid).
 Set seed = seed_end to avoid calculating data that you won't need.
-
 
 2. Run main_s_data.py to initialize a summary. 
 This will order the eigenvalues from

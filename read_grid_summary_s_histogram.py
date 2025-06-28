@@ -25,13 +25,14 @@ values = []
 
 # Extract the first element of each value in row[6]
 for row in grid_search_summary_array:
+    print(str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + "," + str(row[5]))
     for item in row[6]:  # item is a dict with one key-value pair
         for val in item.values():
             values.append(val[0])  # val is a tuple; val[0] is the number we're interested in
 
 # Create histogram
 plt.hist(values, bins=20, range=(0, 1), edgecolor='black')
-plt.title("Histogram of collisions by s-value (rho = 0.866)")
+plt.title("Histogram of 1560 collisions by s-value (N = 40)")
 plt.xlabel("s")
 plt.ylabel("Frequency")
 plt.grid(True)

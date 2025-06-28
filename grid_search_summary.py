@@ -153,7 +153,7 @@ for seed in seed_list:
         m_fine = 16
 
         # Define the s, t ranges
-        s_min, s_max = 0.001, 1.0
+        s_min, s_max = 0.000001, 1.0
         t_min, t_max = 0.0, 1.0
 
         # Compute step size for the grid
