@@ -17,7 +17,9 @@ or to collect statistical data about eigenvalue collisions for a range of seeds.
 
 ### Getting started
 
-First, take a look at main_animation.mp4 to get an instant glimpse of the
+Please visit this page
+[this page](https://carlos-vargas-math.github.io/eigenvalue-collisions/animation.html)
+to get an instant glimpse of the
 main objects that concern the methods in this package.
 
 ### One seed
