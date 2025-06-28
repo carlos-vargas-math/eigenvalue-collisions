@@ -17,6 +17,7 @@ curve = settings.curve
 seed = settings.seed
 
 summary_name = generate_directory_name()
+print("Computing s-steps along t=0, for settings : " + summary_name)
 
 initial_matrix_type = initial_matrix_writter.generate_initial_matrix(dim, distribution, remove_trace, seed, curve)
 initial_matrix = initial_matrix_type['matrix']
@@ -45,3 +46,4 @@ filename = os.path.join(summary_name, "summary.npy")
 # np.save(filename, s_data)
 
 np.save(filename, ginibre_summary)
+print("saved s-summary file : " + summary_name + "/summary.npy")

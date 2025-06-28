@@ -50,50 +50,50 @@
 
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+# import numpy as np
+# import matplotlib.pyplot as plt
+# import matplotlib.animation as animation
 
-def animate_eigenvalues():
-    np.random.seed(42)
-    N = 100  # matrix size
+# def animate_eigenvalues():
+#     np.random.seed(42)
+#     N = 100  # matrix size
 
-    # Precompute Ginibre matrix
-    C = (np.random.randn(N, N) + 1j * np.random.randn(N, N)) / np.sqrt(2 * N)
+#     # Precompute Ginibre matrix
+#     C = (np.random.randn(N, N) + 1j * np.random.randn(N, N)) / np.sqrt(2 * N)
 
-    fig, ax = plt.subplots(figsize=(6, 3))
-    scat = ax.scatter([], [], color="red", marker="o", edgecolor="black", s=10, alpha=0.5)
-    ellipse_line, = ax.plot([], [], 'r--', linewidth=1)
+#     fig, ax = plt.subplots(figsize=(6, 3))
+#     scat = ax.scatter([], [], color="red", marker="o", edgecolor="black", s=10, alpha=0.5)
+#     ellipse_line, = ax.plot([], [], 'r--', linewidth=1)
 
-    ax.axhline(0, color="gray", linestyle="--", linewidth=0.5)
-    ax.axvline(0, color="gray", linestyle="--", linewidth=0.5)
-    ax.set_xlim(-2.1, 2.1)
-    ax.set_ylim(-2.1, 2.1)
-    ax.set_xlabel("Re(λ)")
-    ax.set_ylabel("Im(λ)")
-    ax.set_aspect('equal', adjustable='box')
-    ax.grid(True, linestyle="--", linewidth=0.5)
-    ax.legend(["Ellipse boundary", "Eigenvalues"], loc="upper right")
+#     ax.axhline(0, color="gray", linestyle="--", linewidth=0.5)
+#     ax.axvline(0, color="gray", linestyle="--", linewidth=0.5)
+#     ax.set_xlim(-2.1, 2.1)
+#     ax.set_ylim(-2.1, 2.1)
+#     ax.set_xlabel("Re(λ)")
+#     ax.set_ylabel("Im(λ)")
+#     ax.set_aspect('equal', adjustable='box')
+#     ax.grid(True, linestyle="--", linewidth=0.5)
+#     ax.legend(["Ellipse boundary", "Eigenvalues"], loc="upper right")
 
-    theta = np.linspace(0, 2 * np.pi, 500)
+#     theta = np.linspace(0, 2 * np.pi, 500)
 
-    def update(frame):
-        x = 2 * np.pi * frame / num_frames  # full spin
-        rho = np.sin(2 * x)
-        A = np.cos(x) * C + np.sin(x) * C.conj().T
-        eigvals = np.linalg.eigvals(A)
+#     def update(frame):
+#         x = 2 * np.pi * frame / num_frames  # full spin
+#         rho = np.sin(2 * x)
+#         A = np.cos(x) * C + np.sin(x) * C.conj().T
+#         eigvals = np.linalg.eigvals(A)
 
-        ellipse = (1 + rho) * np.cos(theta) + 1j * (1 - rho) * np.sin(theta)
+#         ellipse = (1 + rho) * np.cos(theta) + 1j * (1 - rho) * np.sin(theta)
 
-        scat.set_offsets(np.c_[eigvals.real, eigvals.imag])
-        ellipse_line.set_data(ellipse.real, ellipse.imag)
-        ax.set_title(f"x = {x:.2f} rad  |  ρ = {rho:.2f}")
-        return scat, ellipse_line
+#         scat.set_offsets(np.c_[eigvals.real, eigvals.imag])
+#         ellipse_line.set_data(ellipse.real, ellipse.imag)
+#         ax.set_title(f"x = {x:.2f} rad  |  ρ = {rho:.2f}")
+#         return scat, ellipse_line
 
-    num_frames = 1000
-    ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=100, blit=True)
-    plt.tight_layout()
-    plt.show()
+#     num_frames = 1000
+#     ani = animation.FuncAnimation(fig, update, frames=num_frames, interval=100, blit=True)
+#     plt.tight_layout()
+#     plt.show()
 
-if __name__ == "__main__":
-    animate_eigenvalues()
+# if __name__ == "__main__":
+#     animate_eigenvalues()

@@ -18,16 +18,21 @@ class Distribution(Enum):
 
 @dataclass
 class Settings:
-    dim: int = 100
+    dim: int = 8
     distribution: object = Distribution.COMPLEX_GAUSSIAN
     remove_trace: bool = False
     curve: object = Curve.CIRCLE
-    seed: int = 2007
-    seed_end: int = 2007
-    grid_m: int = 2
+    seed: int = 2008
+    seed_end: int = 2008
+
+    grid_m: int = 10
     s_steps: int = 2000
     t_steps: int = 1000
-    a: float = 0.35
+
+    # the parameter a in [0,1] interpolates from C to C*, as aC* + sqrt(1-a^2)C.
+    # it only works for Curve.Ellipse and Distribution.ELLIPTIC_LAW
+    # the hermitian case corresponds to a = 0.5 (the grid search does not work in Hermitian cases!)
+    a: float = 0
 
 settings = Settings()
 

@@ -7,7 +7,7 @@ import random_matrix_model.initial_matrix_writter as initial_matrix_writter
 from computation_rect import unordered_linear_segment_eigenvalue_writter
 import time
 from settings import settings, generate_directory_name
-
+import os
 
 # For statistics of multiple seed values, set load_parameters_from_settings = False
 start_time = time.time()
@@ -25,6 +25,7 @@ if seed_end == seed_start:
 else:
     grid_summary_name = "computed_examples/grid_summaries/N=" + str(dim) +"seedFrom" + str(seed_start) + "To" + str(seed_end)  + "&" + str(curve) + "&" + str(distribution) + "&Traceless=" + str(remove_trace) +"&gridm=" + str(grid_value) + ".npy"
 
+print("Searching for eigenvalue collisions with grid method, for : " + grid_summary_name)
 
 # Define the grid_search_summary dtype
 grid_search_summary_dtype = np.dtype([
@@ -246,6 +247,7 @@ for seed in seed_list:
         print(f"Unprocessed squares: {unprocessed_squares}")
 
 grid_search_summary_array = np.array(grid_search_summary_list, dtype=grid_search_summary_dtype)
+os.makedirs(os.path.dirname(grid_summary_name), exist_ok=True)
 np.save(grid_summary_name, grid_search_summary_array)
 
 grid_search_summary_array = np.load(grid_summary_name, allow_pickle=True)
@@ -254,3 +256,4 @@ for row in grid_search_summary_array:
 
 end_time = time.time()
 print(f"\nTotal running time: {end_time - start_time} seconds")
+print("Grid search concluded, summary saved as : " + grid_summary_name)

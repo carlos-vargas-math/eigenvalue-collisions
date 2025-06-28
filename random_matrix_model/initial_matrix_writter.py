@@ -13,8 +13,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 # Given a
-b = 1 / a
-rho = (a**2 - b**2) / (a**2 + b**2)
+rho = 1
+if a != 0:
+    b = 1 / a
+    rho = (a**2 - b**2) / (a**2 + b**2)
 
 def generate_elliptic_matrix(dim, rho, seed=None):
     rng = np.random.default_rng(seed)
@@ -108,7 +110,7 @@ def generate_ginibre_meander(dim, seed=None):
     # Step 5: Generate two Haar-random unitary matrices
     U = unitary_group.rvs(dim, random_state=seed)
 
-    # Step 6: Compute transformed matrix UDV†
+    # Step 6: Compute transformed matrix UDU*
     transformed_matrix = U @ D @ U.conj().T  # This ensures eigenvalues stay the same
     return transformed_matrix
 

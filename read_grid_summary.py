@@ -26,6 +26,7 @@ for row in grid_search_summary_array:
     last_rows[seed] = row  # Always update to keep the last occurrence
 
 # Print the stored last rows
+print("seed | dim | grid_m | unprocessed squares | squares with longer cycles | detected collisions")
 for row in last_rows.values():
     row = list(row)  # Ensure row is a list
     print(" | ".join(map(str, row[:6])))  # Skip row[6]
@@ -50,7 +51,7 @@ plt.xticks(bin_centers, labels=[int(center) for center in bin_centers])
 
 plt.xlabel("Collision Count")
 plt.ylabel("Frequency")
-plt.title("Histogram of Collision Counts (complex Gaussian Ginibre to crossing)")
+plt.title("Histogram of Collision Counts per seed")
 plt.grid(axis="y", linestyle="--", alpha=0.7)
 plt.show()
 

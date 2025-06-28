@@ -78,31 +78,3 @@ def parametrized_curve(n, curve_type:Curve, shift):
 def diagonal_matrix(n, curve_type:Curve, shift):
     points = parametrized_curve(n, curve_type, shift)
     return np.diag(points)
-
-# --- Animation of eigenvalues of diagonal matrices with shifted entries
-n = 40
-curve_type = Curve.ELLIPSE
-num_frames = 300
-
-# Generate consistent colors
-colors = plt.cm.hsv(np.linspace(0, 1, n))
-
-fig, ax = plt.subplots(figsize=(6, 6))
-initial_z = parametrized_curve(n, curve_type, 0)
-initial_eigvals = np.linalg.eigvals(np.diag(initial_z))
-scat = ax.scatter(initial_eigvals.real, initial_eigvals.imag, s=30, c=colors)
-ax.set_xlim(-3, 3)
-ax.set_ylim(-2, 2)
-ax.set_title("Eigenvalues of Shifted Curve Diagonal Matrix")
-ax.set_aspect('equal')
-
-def update(frame):
-    shift = (frame / num_frames) * n
-    z = parametrized_curve(n, curve_type, shift)
-    eigvals = np.linalg.eigvals(np.diag(z))
-    scat.set_offsets(np.c_[eigvals.real, eigvals.imag])
-    ax.set_title(f"Shift = {shift:.2f}")
-    return scat,
-
-ani = FuncAnimation(fig, update, frames=num_frames, interval=100, blit=True)
-plt.show()

@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from settings import settings, generate_directory_name
 
-# For statistics of multiple seed values, set load_parameters_from_settings = False
 seed_start = settings.seed
 seed_end = settings.seed_end
 seed_list = range(seed_start, seed_end + 1)
@@ -32,7 +31,7 @@ for row in grid_search_summary_array:
 
 # Create histogram
 plt.hist(values, bins=20, range=(0, 1), edgecolor='black')
-plt.title("Histogram of 1560 collisions by s-value (N = 40)")
+plt.title("Histogram of collisions by s-value")
 plt.xlabel("s")
 plt.ylabel("Frequency")
 plt.grid(True)

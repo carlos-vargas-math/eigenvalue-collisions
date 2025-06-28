@@ -41,10 +41,3 @@ def create_tracking_data_summary_dtype(dim, m):
     ])
 
     return ginibre_summary_dtype
-
-
-# Example usage:
-dim = 4  # Dimension of the matrix
-m = 10   # Number of summary items
-ginibre_summary_dtype = create_ginibre_summary_dtype(dim, m)
-print(ginibre_summary_dtype)

@@ -4,8 +4,8 @@ import matplotlib.animation as animation
 from permutation_utils import find_permutation
 from settings import settings, generate_directory_name
 
-window_step = 10
-zoom_in_step = 0
+window_step = 6
+zoom_in_step = -1
 
 left_x = - 1.2
 right_x = 1.2
