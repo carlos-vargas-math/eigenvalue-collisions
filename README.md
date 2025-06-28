@@ -40,7 +40,8 @@ R(s,0) to R(s,1) into t_steps, to figure out the cycles/tracks.
 
 5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py and run it. 
 
-*** animation_tracks.py was recently refactored (to produce animations with zooms around the collisions / draw the current bundle of eigenvalues). It will be made user-friendly soon. 
+*** animation_tracks.py was recently refactored (to produce animations with zooms around the collisions / draw the current bundle of eigenvalues), with some hardcoded step values.
+We will soon make it configurable and much more user-friendly. 
 
 ### Several seeds
 

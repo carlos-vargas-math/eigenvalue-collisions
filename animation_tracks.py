@@ -21,7 +21,6 @@ drawn_steps = list(range(20* lower_edge,20*window_step+ 10, 20))
 steps = drawn_steps + live_steps
 steps_2 = list(range(20,110, 20)) + list(range(102, 121, 2))
 
-# You control these:
 n = len(drawn_steps)  # number of steps to pre-draw
 m = len(live_steps)  # number of steps to animate
 
@@ -50,16 +49,15 @@ s_1=steps[-1]* delta_s
 
 main_steps = range(len(steps))
 
-# Extract the dictionaries from the data
 data_list = [row[6] for row in grid_search_summary_array]
 
 rows = []
-for data_dict in data_list:  # data_list contains lists of dictionaries
-    for entry in data_dict:  # Iterate over the list of dictionaries
+for data_dict in data_list:
+    for entry in data_dict:
         for (key_0, key_1), (value_0, value_1, value_2) in entry.items():
             rows.append((key_0, key_1, value_0, value_1, value_2))
 
-# Sort the rows by value_0 (third element in each tuple)
+# Sort the rows by s-value (third element in each tuple)
 rows.sort(key=lambda x: x[2])
 
 # Extract eigenvalues and other parameters
