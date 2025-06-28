@@ -38,7 +38,8 @@ R(s,0) to R(s,1) into t_steps, to figure out the cycles/tracks.
 
 4. Run grid_search_summary.py and compute the eigenvalue collisions. 
 
-5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py and run it.
+5. Once these tracks and collisions have been calculated, indicate the steps that will be displayed in animation_tracks.py and run it. 
+ToDo: 5. should be much more user friendly!, e.g. compute missing steps if required, instead of throwing errors 
 
 ### Several seeds
 
