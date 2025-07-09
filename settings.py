@@ -18,14 +18,14 @@ class Distribution(Enum):
 
 @dataclass
 class Settings:
-    dim: int = 8
-    distribution: object = Distribution.COMPLEX_GAUSSIAN
-    remove_trace: bool = False
+    dim: int = 10
+    distribution: object = Distribution.BERNOULLI
+    remove_trace: bool = True
     curve: object = Curve.CIRCLE
-    seed: int = 2008
-    seed_end: int = 2008
+    seed: int = 1001
+    seed_end: int = 1001
 
-    grid_m: int = 10
+    grid_m: int = 6
     s_steps: int = 2000
     t_steps: int = 1000
 

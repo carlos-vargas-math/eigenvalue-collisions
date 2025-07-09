@@ -15,7 +15,7 @@ summary_file_name = summary_name + "/summary.npy"
 
 print("computing t-steps for fixed s-values")
 
-t_steps = list(range(0,161, 2))
+t_steps = list(range(160,301, 10))
 # t_steps = list(range(1000,2010, 20))
 # t_steps = list(range(111, 120, 1))
 # t_steps = [1000, 1100, 1110, 1120, 1130, 1140, 1150, 1160, 1170, 1180, 1190, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000]
