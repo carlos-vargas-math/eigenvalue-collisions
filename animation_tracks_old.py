@@ -5,7 +5,7 @@ from permutation_utils import find_permutation
 from settings import settings, generate_directory_name
 
 
-steps = list(range(10, 201, 10))
+steps = list(range(10, 301, 20))
 speed = 10
 
 dim = settings.dim
@@ -19,7 +19,12 @@ distribution_name = str(distribution)
 summary_name = generate_directory_name()
 
 loaded_data = [np.load(f"{summary_name}/{step}.npy", allow_pickle=True) for step in steps]
-grid_search_summary_array = np.load(summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
+try:
+    grid_search_summary_array = np.load(summary_name + "/gridm=" + str(grid_m) + ".npy", allow_pickle=True)
+except FileNotFoundError:
+    print("Collision summary not found")
+    grid_search_summary_array = []
+
 delta_s = 1/(settings.s_steps)
 s_0=steps[0]* delta_s
 s_1=steps[-1]* delta_s
@@ -68,8 +73,8 @@ fig, ax = plt.subplots()
 ax.set_facecolor("black")
 fig.patch.set_facecolor("black")
 ax.tick_params(colors='white')
-ax.set_xlim(-4.2, 4.2)
-ax.set_ylim(-2.2, 2.2)
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
 ax.set_aspect('equal', 'box')
 
 # Choose a sublist of rows to include in the scatter plot
@@ -91,15 +96,15 @@ sublist_y = [z[1] for z in sublist_points]
 sublist_value_1 = [z[2] for z in sublist_points]  # Store value_1
 
 # Plot the additional points on the scatter plot (initially white)
-scatter_special = ax.scatter(
-    sublist_x, sublist_y,
-    s=100,
-    c="white",
-    marker="x",
-    alpha=0.8,
-    zorder=3
-)
-
+# scatter_special = ax.scatter(
+#     sublist_x, sublist_y,
+#     s=100,
+#     c="white",
+#     marker="x",
+#     alpha=0.8,
+#     zorder=3
+# )
+ax.axis('off')
 # Plot tracks for all steps
 for eigenvalues, cycle_decomposition in zip(eigenvalues_all_steps, all_cycle_decompositions):
     eigenx = eigenvalues.real
@@ -153,18 +158,18 @@ def animate(i):
         scatter_plot.set_offsets(np.c_[eigenx_steps[j][i, :], eigeny_steps[j][i, :]])
 
     new_colors = []
-    for value_1 in sublist_value_1:
-        color = "red" if value_1 > t[i] else "white"
-        new_colors.append(color)
+    # for value_1 in sublist_value_1:
+    #     color = "red" if value_1 > t[i] else "white"
+    #     new_colors.append(color)
 
-    scatter_special.set_color(new_colors)  # Update colors dynamically
+    # scatter_special.set_color(new_colors)  # Update colors dynamically
 
-    ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
+    # ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
 # ani = animation.FuncAnimation(fig, animate, frames=range(3490, 3491, speed), interval=100)
-# ani.save("animations/eigenvalue_animation.gif", writer="pillow", fps=10)
+ani.save("animations/eigenvalue_animation.gif", writer="pillow", fps=10, dpi=200)
 
 # Display the plot
 plt.show()
