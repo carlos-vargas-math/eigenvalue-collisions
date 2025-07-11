@@ -14,6 +14,9 @@ remove_trace = settings.remove_trace
 curve = settings.curve
 seed = settings.seed
 grid_m = settings.grid_m
+include_axes = settings.include_axes
+include_collisions = settings.include_collisions
+
 
 distribution_name = str(distribution)
 summary_name = generate_directory_name()
@@ -96,15 +99,19 @@ sublist_y = [z[1] for z in sublist_points]
 sublist_value_1 = [z[2] for z in sublist_points]  # Store value_1
 
 # Plot the additional points on the scatter plot (initially white)
-scatter_special = ax.scatter(
-    sublist_x, sublist_y,
-    s=100,
-    c="white",
-    marker="x",
-    alpha=0.8,
-    zorder=3
-)
-ax.axis('off')
+if include_collisions:
+    scatter_special = ax.scatter(
+        sublist_x, sublist_y,
+        s=100,
+        c="white",
+        marker="x",
+        alpha=0.8,
+        zorder=3
+    )
+    
+if not include_axes:
+    ax.axis('off')
+
 # Plot tracks for all steps
 for eigenvalues, cycle_decomposition in zip(eigenvalues_all_steps, all_cycle_decompositions):
     eigenx = eigenvalues.real
@@ -158,13 +165,15 @@ def animate(i):
         scatter_plot.set_offsets(np.c_[eigenx_steps[j][i, :], eigeny_steps[j][i, :]])
 
     new_colors = []
-    for value_1 in sublist_value_1:
-        color = "red" if value_1 > t[i] else "white"
-        new_colors.append(color)
+    if include_collisions:
+        for value_1 in sublist_value_1:
+            color = "red" if value_1 > t[i] else "white"
+            new_colors.append(color)
 
-    scatter_special.set_color(new_colors)  # Update colors dynamically
+        scatter_special.set_color(new_colors)  # Update colors dynamically
 
-    ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
+    if include_axes:
+        ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)

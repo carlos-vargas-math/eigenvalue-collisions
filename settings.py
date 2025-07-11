@@ -18,21 +18,25 @@ class Distribution(Enum):
 
 @dataclass
 class Settings:
+    # Model
     dim: int = 10
     distribution: object = Distribution.BERNOULLI
     remove_trace: bool = True
     curve: object = Curve.CIRCLE
-    seed: int = 1001
-    seed_end: int = 1001
-
-    grid_m: int = 6
-    s_steps: int = 2000
-    t_steps: int = 1000
-
-    # the parameter a in [0,1] interpolates from C to C*, as aC* + sqrt(1-a^2)C.
+    seed: int = 1
+    seed_end: int = 1
+    a: float = 0     # the parameter a in [0,1] interpolates from C to C*, as aC* + sqrt(1-a^2)C.
     # it only works for Curve.Ellipse and Distribution.ELLIPTIC_LAW
     # the hermitian case corresponds to a = 0.5 (the grid search does not work in Hermitian cases!)
-    a: float = 0
+
+    # Grid
+    grid_m: int = 6
+
+    # Animation
+    s_steps: int = 2000
+    t_steps: int = 1000
+    include_axes: bool = False
+    include_collisions: bool = False
 
 settings = Settings()
 
