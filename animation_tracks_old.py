@@ -96,14 +96,14 @@ sublist_y = [z[1] for z in sublist_points]
 sublist_value_1 = [z[2] for z in sublist_points]  # Store value_1
 
 # Plot the additional points on the scatter plot (initially white)
-# scatter_special = ax.scatter(
-#     sublist_x, sublist_y,
-#     s=100,
-#     c="white",
-#     marker="x",
-#     alpha=0.8,
-#     zorder=3
-# )
+scatter_special = ax.scatter(
+    sublist_x, sublist_y,
+    s=100,
+    c="white",
+    marker="x",
+    alpha=0.8,
+    zorder=3
+)
 ax.axis('off')
 # Plot tracks for all steps
 for eigenvalues, cycle_decomposition in zip(eigenvalues_all_steps, all_cycle_decompositions):
@@ -158,13 +158,13 @@ def animate(i):
         scatter_plot.set_offsets(np.c_[eigenx_steps[j][i, :], eigeny_steps[j][i, :]])
 
     new_colors = []
-    # for value_1 in sublist_value_1:
-    #     color = "red" if value_1 > t[i] else "white"
-    #     new_colors.append(color)
+    for value_1 in sublist_value_1:
+        color = "red" if value_1 > t[i] else "white"
+        new_colors.append(color)
 
-    # scatter_special.set_color(new_colors)  # Update colors dynamically
+    scatter_special.set_color(new_colors)  # Update colors dynamically
 
-    # ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
+    ax.set_title(f"Time step = {i}, t = {t[i]:.4f}, s from {s_0:.4f} to {s_1:.4f}", color='white')
 
 # Create the animation
 ani = animation.FuncAnimation(fig, animate, frames=range(0, eigenvalues.shape[0], speed), interval=100)
